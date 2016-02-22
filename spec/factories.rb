@@ -1,3 +1,5 @@
+require "faker"
+
 FactoryGirl.define do
   factory :invoice_item do
     item nil
@@ -5,26 +7,31 @@ FactoryGirl.define do
     quantity 1
     unit_price 1
   end
+
   factory :transaction do
     invoice nil
-    credit_card_number 1
+    credit_card_number "1234567812345678"
     credit_card_expiration_date "2016-02-22 14:17:27"
     result false
   end
+
   factory :invoice do
     customer nil
     merchant nil
     status 1
   end
+
   factory :item do
     name "MyString"
     description "MyString"
     unit_price 1
     merchant nil
   end
+
   factory :merchant do
-    name "MyString"
+    name Faker::Company.name
   end
+
   factory :customer do
     first_name "MyString"
     last_name "MyString"

@@ -10,6 +10,7 @@ gem 'bcrypt', '~> 3.1.7'
 gem 'figaro'
 gem 'pg'
 gem 'active_model_serializers'
+gem 'responders'
 
 group :development, :test do
   gem 'byebug'
@@ -30,4 +31,5 @@ end
 group :test do
   gem 'simplecov', require: false
   gem 'bullet'
+  gem 'faker'
 end
