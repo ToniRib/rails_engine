@@ -1,6 +1,15 @@
 require "faker"
 
 FactoryGirl.define do
+  factory :merchant do
+    name Faker::Company.name
+  end
+
+  factory :customer do
+    first_name Faker::Name.first_name
+    last_name Faker::Name.last_name
+  end
+
   factory :invoice_item do
     item nil
     invoice nil
@@ -26,14 +35,5 @@ FactoryGirl.define do
     description "MyString"
     unit_price 1
     merchant nil
-  end
-
-  factory :merchant do
-    name Faker::Company.name
-  end
-
-  factory :customer do
-    first_name "MyString"
-    last_name "MyString"
   end
 end
