@@ -6,6 +6,10 @@ class Api::V1::MerchantsController < ApplicationController
   end
 
   def show
-    respond_with Merchant.find(params[:id])
+    if params[:id]
+      respond_with Merchant.find(params[:id])
+    elsif params[:name]
+      respond_with Merchant.find_by(name: params[:name])
+    end
   end
 end
