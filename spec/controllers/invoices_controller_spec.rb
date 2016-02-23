@@ -23,7 +23,7 @@ RSpec.describe Api::V1::InvoicesController, type: :controller do
     end
   end
 
-  describe "GET #show.json" do
+  describe "GET #show.json with id" do
     let(:json_response) { JSON.parse(response.body) }
     let(:invoice) { create(:invoice) }
 
@@ -36,6 +36,76 @@ RSpec.describe Api::V1::InvoicesController, type: :controller do
 
     it "returns the specific invoice in JSON format" do
       get :show, id: invoice.id, format: :json
+
+      expect(json_response["id"]).to eq(invoice.id)
+      expect(json_response["customer_id"]).to eq(invoice.customer_id)
+      expect(json_response["merchant_id"]).to eq(invoice.merchant_id)
+      expect(json_response["status"]).to eq(invoice.status)
+    end
+  end
+
+  describe "GET #show.json with customer_id" do
+    let(:json_response) { JSON.parse(response.body) }
+    let(:invoice) { create(:invoice) }
+
+    it "returns the specific invoice in JSON format" do
+      get :show, customer_id: invoice.customer_id, format: :json
+
+      expect(json_response["id"]).to eq(invoice.id)
+      expect(json_response["customer_id"]).to eq(invoice.customer_id)
+      expect(json_response["merchant_id"]).to eq(invoice.merchant_id)
+      expect(json_response["status"]).to eq(invoice.status)
+    end
+  end
+
+  describe "GET #show.json with merchant_id" do
+    let(:json_response) { JSON.parse(response.body) }
+    let(:invoice) { create(:invoice) }
+
+    it "returns the specific invoice in JSON format" do
+      get :show, merchant_id: invoice.merchant_id, format: :json
+
+      expect(json_response["id"]).to eq(invoice.id)
+      expect(json_response["customer_id"]).to eq(invoice.customer_id)
+      expect(json_response["merchant_id"]).to eq(invoice.merchant_id)
+      expect(json_response["status"]).to eq(invoice.status)
+    end
+  end
+
+  describe "GET #show.json with status" do
+    let(:json_response) { JSON.parse(response.body) }
+    let(:invoice) { create(:invoice) }
+
+    it "returns the specific invoice in JSON format" do
+      get :show, status: invoice.status, format: :json
+
+      expect(json_response["id"]).to eq(invoice.id)
+      expect(json_response["customer_id"]).to eq(invoice.customer_id)
+      expect(json_response["merchant_id"]).to eq(invoice.merchant_id)
+      expect(json_response["status"]).to eq(invoice.status)
+    end
+  end
+
+  describe "GET #show.json with created_at" do
+    let(:json_response) { JSON.parse(response.body) }
+    let(:invoice) { create(:invoice) }
+
+    it "returns the specific invoice in JSON format" do
+      get :show, created_at: invoice.created_at, format: :json
+
+      expect(json_response["id"]).to eq(invoice.id)
+      expect(json_response["customer_id"]).to eq(invoice.customer_id)
+      expect(json_response["merchant_id"]).to eq(invoice.merchant_id)
+      expect(json_response["status"]).to eq(invoice.status)
+    end
+  end
+
+  describe "GET #show.json with updated_at" do
+    let(:json_response) { JSON.parse(response.body) }
+    let(:invoice) { create(:invoice) }
+
+    it "returns the specific invoice in JSON format" do
+      get :show, updated_at: invoice.updated_at, format: :json
 
       expect(json_response["id"]).to eq(invoice.id)
       expect(json_response["customer_id"]).to eq(invoice.customer_id)

@@ -4,7 +4,7 @@ class CustomerFinder
   end
 
   def self.sanitize(params)
-    params.select { |_, v| customer_params.include?(v) }
+    params.select { |k, _| customer_params.include?(k) }
   end
 
   def self.customer_params

@@ -4,7 +4,7 @@ class MerchantFinder
   end
 
   def self.sanitize(params)
-    params.select { |_, v| merchant_params.include?(v) }
+    params.select { |k, _| merchant_params.include?(k) }
   end
 
   def self.merchant_params

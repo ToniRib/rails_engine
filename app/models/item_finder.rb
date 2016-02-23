@@ -4,7 +4,7 @@ class ItemFinder
   end
 
   def self.sanitize(params)
-    params.select { |_, v| item_params.include?(v) }
+    params.select { |k, _| item_params.include?(k) }
   end
 
   def self.item_params
