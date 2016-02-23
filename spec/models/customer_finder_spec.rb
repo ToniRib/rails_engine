@@ -78,7 +78,7 @@ RSpec.describe CustomerFinder, type: :model do
       expect(customers.first.last_name).to eq("Rib")
     end
 
-    it "finds multiple customer by first name" do
+    it "finds multiple customers by first name" do
       load_customers
       customers = CustomerFinder.find_multiple(first_name: "Toni")
 
@@ -90,7 +90,7 @@ RSpec.describe CustomerFinder, type: :model do
       expect(customers.last.last_name).to eq("Aubrecht")
     end
 
-    it "finds multiple customer by last name" do
+    it "finds multiple customers by last name" do
       load_customers
       customers = CustomerFinder.find_multiple(last_name: "Rib")
 
@@ -102,7 +102,7 @@ RSpec.describe CustomerFinder, type: :model do
       expect(customers.last.last_name).to eq("Rib")
     end
 
-    it "finds multiple customer by created_at JSON string" do
+    it "finds multiple customers by created_at JSON string" do
       load_customers
       date = (Date.today - 2).to_json
       customers = CustomerFinder.find_multiple(created_at: date)
@@ -115,7 +115,7 @@ RSpec.describe CustomerFinder, type: :model do
       expect(customers.last.last_name).to eq("Rib")
     end
 
-    it "finds multiple customer by updated_at JSON string" do
+    it "finds multiple customers by updated_at JSON string" do
       load_customers
       date = (Date.today - 2).to_json
       customers = CustomerFinder.find_multiple(updated_at: date)
