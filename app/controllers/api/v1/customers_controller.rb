@@ -6,6 +6,6 @@ class Api::V1::CustomersController < ApplicationController
   end
 
   def show
-    respond_with CustomerFinder.find_single_customer(params)
+    respond_with CustomerFinder.find_single(params)
   end
 end

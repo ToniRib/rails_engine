@@ -1,5 +1,5 @@
 class InvoiceFinder
-  def self.find_single_invoice(params)
+  def self.find_single(params)
     if params[:id]
       Invoice.find(params[:id])
     elsif params[:customer_id]
@@ -9,9 +9,9 @@ class InvoiceFinder
     elsif params[:status]
       Invoice.find_by(status: params[:status])
     elsif params[:created_at]
-      Invoice.find_by(created_at: params[:created_at])
+      Invoice.find_by("created_at = ?", params[:created_at])
     elsif params[:updated_at]
-      Invoice.find_by(updated_at: params[:updated_at])
+      Invoice.find_by("updated_at = ?", params[:updated_at])
     end
   end
 end

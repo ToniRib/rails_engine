@@ -6,6 +6,6 @@ class Api::V1::TransactionsController < ApplicationController
   end
 
   def show
-    respond_with TransactionFinder.find_single_transaction(params)
+    respond_with TransactionFinder.find_single(params)
   end
 end
