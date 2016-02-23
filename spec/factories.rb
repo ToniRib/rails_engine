@@ -17,6 +17,12 @@ FactoryGirl.define do
     merchant
   end
 
+  factory :invoice do
+    customer
+    merchant
+    status "shipped"
+  end
+
   factory :invoice_item do
     item nil
     invoice nil
@@ -29,11 +35,5 @@ FactoryGirl.define do
     credit_card_number "1234567812345678"
     credit_card_expiration_date "2016-02-22 14:17:27"
     result false
-  end
-
-  factory :invoice do
-    customer nil
-    merchant nil
-    status 1
   end
 end
