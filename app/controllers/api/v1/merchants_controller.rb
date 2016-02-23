@@ -6,10 +6,16 @@ class Api::V1::MerchantsController < ApplicationController
   end
 
   def show
+    respond_with find_merchant(params)
+  end
+
+  private
+
+  def find_merchant(params)
     if params[:id]
-      respond_with Merchant.find(params[:id])
+      Merchant.find(params[:id])
     elsif params[:name]
-      respond_with Merchant.find_by(name: params[:name])
+      Merchant.where("name ILIKE ?", params[:name]).first
     end
   end
 end

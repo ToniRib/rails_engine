@@ -59,5 +59,12 @@ RSpec.describe Api::V1::MerchantsController, type: :controller do
       expect(json_response["id"]).to eq(merchant.id)
       expect(json_response["name"]).to eq(merchant.name)
     end
+
+    it "returns the specific merchant in JSON format - case insensitive" do
+      get :show, name: merchant.name.downcase, format: :json
+
+      expect(json_response["id"]).to eq(merchant.id)
+      expect(json_response["name"]).to eq(merchant.name)
+    end
   end
 end
