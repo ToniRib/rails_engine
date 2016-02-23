@@ -21,4 +21,25 @@ RSpec.describe Api::V1::InvoiceItemsController, type: :controller do
       expect(json_response.last["item_id"]).to eq(invoice_items.last.item_id)
     end
   end
+
+  describe "GET #show.json" do
+    let(:json_response) { JSON.parse(response.body) }
+    let(:invoice_item) { create(:invoice_item) }
+
+    it "responds with successful 200 HTTP status code" do
+      get :show, id: invoice_item.id, format: :json
+
+      expect(response).to be_success
+    end
+
+    it "returns the specific invoice_item in JSON format" do
+      get :show, id: invoice_item.id, format: :json
+
+      expect(json_response["id"]).to eq(invoice_item.id)
+      expect(json_response["item_id"]).to eq(invoice_item.item_id)
+      expect(json_response["invoice_id"]).to eq(invoice_item.invoice_id)
+      expect(json_response["quantity"]).to eq(invoice_item.quantity)
+      expect(json_response["unit_price"]).to eq(invoice_item.unit_price)
+    end
+  end
 end

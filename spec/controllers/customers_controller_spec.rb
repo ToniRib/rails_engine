@@ -32,7 +32,7 @@ RSpec.describe Api::V1::CustomersController, type: :controller do
       expect(response).to be_success
     end
 
-    it "returns all of the customers in JSON format" do
+    it "returns the specific customer in JSON format" do
       get :show, id: customer.id, format: :json
 
       expect(json_response["id"]).to eq(customer.id)
