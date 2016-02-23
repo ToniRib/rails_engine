@@ -68,6 +68,67 @@ RSpec.describe CustomerFinder, type: :model do
     end
   end
 
+  describe "#find_multiple" do
+    it "finds one customer by id" do
+      load_customers
+      customers = CustomerFinder.find_multiple(id: 1)
+
+      expect(customers.first.id).to eq(1)
+      expect(customers.first.first_name).to eq("Toni")
+      expect(customers.first.last_name).to eq("Rib")
+    end
+
+    it "finds multiple customer by first name" do
+      load_customers
+      customers = CustomerFinder.find_multiple(first_name: "Toni")
+
+      expect(customers.first.id).to eq(1)
+      expect(customers.first.first_name).to eq("Toni")
+      expect(customers.first.last_name).to eq("Rib")
+      expect(customers.last.id).to eq(2)
+      expect(customers.last.first_name).to eq("Toni")
+      expect(customers.last.last_name).to eq("Aubrecht")
+    end
+
+    it "finds multiple customer by last name" do
+      load_customers
+      customers = CustomerFinder.find_multiple(last_name: "Rib")
+
+      expect(customers.first.id).to eq(1)
+      expect(customers.first.first_name).to eq("Toni")
+      expect(customers.first.last_name).to eq("Rib")
+      expect(customers.last.id).to eq(3)
+      expect(customers.last.first_name).to eq("Dan")
+      expect(customers.last.last_name).to eq("Rib")
+    end
+
+    it "finds multiple customer by created_at JSON string" do
+      load_customers
+      date = (Date.today - 2).to_json
+      customers = CustomerFinder.find_multiple(created_at: date)
+
+      expect(customers.first.id).to eq(1)
+      expect(customers.first.first_name).to eq("Toni")
+      expect(customers.first.last_name).to eq("Rib")
+      expect(customers.last.id).to eq(3)
+      expect(customers.last.first_name).to eq("Dan")
+      expect(customers.last.last_name).to eq("Rib")
+    end
+
+    it "finds multiple customer by updated_at JSON string" do
+      load_customers
+      date = (Date.today - 2).to_json
+      customers = CustomerFinder.find_multiple(updated_at: date)
+
+      expect(customers.first.id).to eq(1)
+      expect(customers.first.first_name).to eq("Toni")
+      expect(customers.first.last_name).to eq("Rib")
+      expect(customers.last.id).to eq(3)
+      expect(customers.last.first_name).to eq("Dan")
+      expect(customers.last.last_name).to eq("Rib")
+    end
+  end
+
   def load_customers
     create(:customer, id: 1,
                       first_name: "Toni",
