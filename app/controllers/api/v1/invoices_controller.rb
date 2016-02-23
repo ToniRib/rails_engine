@@ -6,6 +6,6 @@ class Api::V1::InvoicesController < ApplicationController
   end
 
   def show
-    respond_with Invoice.find(params[:id])
+    respond_with InvoiceFinder.find_single_invoice(params)
   end
 end
