@@ -3,11 +3,15 @@ require "faker"
 FactoryGirl.define do
   factory :merchant do
     name Faker::Company.name
+    created_at Date.today
+    updated_at Date.today
   end
 
   factory :customer do
     first_name Faker::Name.first_name
     last_name Faker::Name.last_name
+    created_at Date.today
+    updated_at Date.today
   end
 
   factory :item do
@@ -15,12 +19,16 @@ FactoryGirl.define do
     description Faker::Lorem.sentence(5)
     unit_price Faker::Number.number(5)
     merchant
+    created_at Date.today
+    updated_at Date.today
   end
 
   factory :invoice do
     customer
     merchant
     status "shipped"
+    created_at Date.today
+    updated_at Date.today
   end
 
   factory :invoice_item do
@@ -28,12 +36,16 @@ FactoryGirl.define do
     invoice
     quantity Faker::Number.number(1)
     unit_price Faker::Number.number(5)
+    created_at Date.today
+    updated_at Date.today
   end
 
   factory :transaction do
     invoice
     credit_card_number Faker::Business.credit_card_number.gsub!("-", "")
     result
+    created_at Date.today
+    updated_at Date.today
   end
 
   sequence :result, %w(success failed).cycle do |n|

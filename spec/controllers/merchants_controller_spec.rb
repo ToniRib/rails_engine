@@ -145,7 +145,6 @@ RSpec.describe Api::V1::MerchantsController, type: :controller do
     let(:merchants) { create_list(:merchant, 2) }
     let(:merchant) { merchants.first }
 
-
     it "returns the specific merchant in JSON format" do
       get :show, created_at: merchant.created_at.to_json, format: :json
 

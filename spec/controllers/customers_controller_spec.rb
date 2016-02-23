@@ -26,7 +26,7 @@ RSpec.describe Api::V1::CustomersController, type: :controller do
   describe "GET #index.json with id" do
     let(:json_response) { JSON.parse(response.body) }
 
-    xit "returns all of the customers in JSON format" do
+    it "returns all of the customers in JSON format" do
       customers = create_list(:customer, 2)
       get :index, id: customers.first.id, format: :json
 
