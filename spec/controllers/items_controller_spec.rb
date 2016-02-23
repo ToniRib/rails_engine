@@ -25,7 +25,8 @@ RSpec.describe Api::V1::ItemsController, type: :controller do
 
   describe "GET #show.json with id" do
     let(:json_response) { JSON.parse(response.body) }
-    let(:item) { create(:item) }
+    let(:items) { create_list(:item, 2) }
+    let(:item) { items.first }
 
     it "responds with successful 200 HTTP status code" do
       get :show, id: item.id, format: :json
@@ -46,7 +47,8 @@ RSpec.describe Api::V1::ItemsController, type: :controller do
 
   describe "GET #show.json with name" do
     let(:json_response) { JSON.parse(response.body) }
-    let(:item) { create(:item) }
+    let(:items) { create_list(:item, 2) }
+    let(:item) { items.first }
 
     it "returns the specific item in JSON format" do
       get :show, name: item.name, format: :json
@@ -69,7 +71,8 @@ RSpec.describe Api::V1::ItemsController, type: :controller do
 
   describe "GET #show.json with description" do
     let(:json_response) { JSON.parse(response.body) }
-    let(:item) { create(:item) }
+    let(:items) { create_list(:item, 2) }
+    let(:item) { items.first }
 
     it "returns the specific item in JSON format" do
       get :show, description: item.description, format: :json
@@ -92,7 +95,8 @@ RSpec.describe Api::V1::ItemsController, type: :controller do
 
   describe "GET #show.json with unit_price" do
     let(:json_response) { JSON.parse(response.body) }
-    let(:item) { create(:item) }
+    let(:items) { create_list(:item, 2) }
+    let(:item) { items.first }
 
     it "returns the specific item in JSON format" do
       get :show, unit_price: item.unit_price, format: :json
@@ -106,7 +110,8 @@ RSpec.describe Api::V1::ItemsController, type: :controller do
 
   describe "GET #show.json with merchant_id" do
     let(:json_response) { JSON.parse(response.body) }
-    let(:item) { create(:item) }
+    let(:items) { create_list(:item, 2) }
+    let(:item) { items.first }
 
     it "returns the specific item in JSON format" do
       get :show, merchant_id: item.merchant_id, format: :json
@@ -120,7 +125,8 @@ RSpec.describe Api::V1::ItemsController, type: :controller do
 
   describe "GET #show.json with created_at" do
     let(:json_response) { JSON.parse(response.body) }
-    let(:item) { create(:item) }
+    let(:items) { create_list(:item, 2) }
+    let(:item) { items.first }
 
     it "returns the specific item in JSON format" do
       get :show, created_at: item.created_at, format: :json
@@ -134,7 +140,8 @@ RSpec.describe Api::V1::ItemsController, type: :controller do
 
   describe "GET #show.json with updated_at" do
     let(:json_response) { JSON.parse(response.body) }
-    let(:item) { create(:item) }
+    let(:items) { create_list(:item, 2) }
+    let(:item) { items.first }
 
     it "returns the specific item in JSON format" do
       get :show, updated_at: item.updated_at, format: :json

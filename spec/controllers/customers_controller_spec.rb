@@ -25,7 +25,8 @@ RSpec.describe Api::V1::CustomersController, type: :controller do
 
   describe "GET #show.json with id" do
     let(:json_response) { JSON.parse(response.body) }
-    let(:customer) { create(:customer) }
+    let(:customers) { create_list(:customer, 2) }
+    let(:customer) { customers.first }
 
     it "responds with successful 200 HTTP status code" do
       get :show, id: customer.id, format: :json
@@ -45,7 +46,8 @@ RSpec.describe Api::V1::CustomersController, type: :controller do
 
   describe "GET #show.json with first_name" do
     let(:json_response) { JSON.parse(response.body) }
-    let(:customer) { create(:customer) }
+    let(:customers) { create_list(:customer, 2) }
+    let(:customer) { customers.first }
 
     it "returns the specific customer in JSON format" do
       get :show, first_name: customer.first_name, format: :json
@@ -66,7 +68,8 @@ RSpec.describe Api::V1::CustomersController, type: :controller do
 
   describe "GET #show.json with last_name" do
     let(:json_response) { JSON.parse(response.body) }
-    let(:customer) { create(:customer) }
+    let(:customers) { create_list(:customer, 2) }
+    let(:customer) { customers.first }
 
     it "returns the specific customer in JSON format" do
       get :show, last_name: customer.last_name, format: :json
@@ -87,7 +90,8 @@ RSpec.describe Api::V1::CustomersController, type: :controller do
 
   describe "GET #show.json with created_at" do
     let(:json_response) { JSON.parse(response.body) }
-    let(:customer) { create(:customer) }
+    let(:customers) { create_list(:customer, 2) }
+    let(:customer) { customers.first }
 
     it "returns the specific customer in JSON format" do
       get :show, created_at: customer.created_at, format: :json
@@ -100,7 +104,8 @@ RSpec.describe Api::V1::CustomersController, type: :controller do
 
   describe "GET #show.json with created_at" do
     let(:json_response) { JSON.parse(response.body) }
-    let(:customer) { create(:customer) }
+    let(:customers) { create_list(:customer, 2) }
+    let(:customer) { customers.first }
 
     it "returns the specific customer in JSON format" do
       get :show, updated_at: customer.updated_at, format: :json

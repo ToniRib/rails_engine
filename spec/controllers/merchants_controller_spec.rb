@@ -25,7 +25,8 @@ RSpec.describe Api::V1::MerchantsController, type: :controller do
 
   describe "GET #show.json with id" do
     let(:json_response) { JSON.parse(response.body) }
-    let(:merchant) { create(:merchant) }
+    let(:merchants) { create_list(:merchant, 2) }
+    let(:merchant) { merchants.first }
 
     it "responds with successful 200 HTTP status code" do
       get :show, id: merchant.id, format: :json
@@ -44,7 +45,8 @@ RSpec.describe Api::V1::MerchantsController, type: :controller do
 
   describe "GET #show.json with name" do
     let(:json_response) { JSON.parse(response.body) }
-    let(:merchant) { create(:merchant) }
+    let(:merchants) { create_list(:merchant, 2) }
+    let(:merchant) { merchants.first }
 
     it "returns the specific merchant in JSON format" do
       get :show, name: merchant.name, format: :json
@@ -63,7 +65,8 @@ RSpec.describe Api::V1::MerchantsController, type: :controller do
 
   describe "GET #show.json with created_at" do
     let(:json_response) { JSON.parse(response.body) }
-    let(:merchant) { create(:merchant) }
+    let(:merchants) { create_list(:merchant, 2) }
+    let(:merchant) { merchants.first }
 
     it "returns the specific merchant in JSON format" do
       get :show, created_at: merchant.created_at, format: :json
@@ -75,7 +78,8 @@ RSpec.describe Api::V1::MerchantsController, type: :controller do
 
   describe "GET #show.json with updated_at" do
     let(:json_response) { JSON.parse(response.body) }
-    let(:merchant) { create(:merchant) }
+    let(:merchants) { create_list(:merchant, 2) }
+    let(:merchant) { merchants.first }
 
     it "returns the specific merchant in JSON format" do
       get :show, updated_at: merchant.updated_at, format: :json
