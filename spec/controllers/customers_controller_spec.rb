@@ -71,7 +71,7 @@ RSpec.describe Api::V1::CustomersController, type: :controller do
 
     it "returns all of the customers in JSON format" do
       customers = create_list(:customer, 2, created_at: Date.today)
-      get :index, created_at: customers.first.created_at, format: :json
+      get :index, created_at: customers.first.created_at.to_json, format: :json
 
       expect(json_response.count).to eq(2)
       expect(DateTime.parse(json_response.first["created_at"])).to eq(Date.today)
@@ -86,7 +86,7 @@ RSpec.describe Api::V1::CustomersController, type: :controller do
 
     it "returns all of the customers in JSON format" do
       customers = create_list(:customer, 2, updated_at: Date.today)
-      get :index, updated_at: customers.first.updated_at, format: :json
+      get :index, updated_at: customers.first.updated_at.to_json, format: :json
 
       expect(json_response.count).to eq(2)
       expect(DateTime.parse(json_response.first["updated_at"])).to eq(Date.today)
@@ -167,7 +167,7 @@ RSpec.describe Api::V1::CustomersController, type: :controller do
     let(:customer) { customers.first }
 
     it "returns the specific customer in JSON format" do
-      get :show, created_at: customer.created_at, format: :json
+      get :show, created_at: customer.created_at.to_json, format: :json
 
       expect(json_response["id"]).to eq(customer.id)
       expect(json_response["first_name"]).to eq(customer.first_name)
@@ -181,7 +181,7 @@ RSpec.describe Api::V1::CustomersController, type: :controller do
     let(:customer) { customers.first }
 
     it "returns the specific customer in JSON format" do
-      get :show, updated_at: customer.updated_at, format: :json
+      get :show, updated_at: customer.updated_at.to_json, format: :json
 
       expect(json_response["id"]).to eq(customer.id)
       expect(json_response["first_name"]).to eq(customer.first_name)
