@@ -2,7 +2,7 @@ require "rails_helper"
 
 RSpec.describe Api::V1::MerchantsController, type: :controller do
   describe "GET #index.json" do
-    let(:json_response) { JSON.parse(response.body)["merchants"] }
+    let(:json_response) { JSON.parse(response.body) }
 
     it "responds with successful 200 HTTP status code" do
       get :index, format: :json
@@ -24,7 +24,7 @@ RSpec.describe Api::V1::MerchantsController, type: :controller do
   end
 
   describe "GET #index.json with id" do
-    let(:json_response) { JSON.parse(response.body)["merchants"] }
+    let(:json_response) { JSON.parse(response.body) }
     let(:merchants) { create_list(:merchant, 2) }
     let(:merchant) { merchants.first }
 
@@ -44,7 +44,7 @@ RSpec.describe Api::V1::MerchantsController, type: :controller do
   end
 
   describe "GET #index.json with name" do
-    let(:json_response) { JSON.parse(response.body)["merchants"] }
+    let(:json_response) { JSON.parse(response.body) }
     let(:merchants) { create_list(:merchant, 2, name: "Toni") }
 
     it "returns the specific merchant in JSON format" do
@@ -69,12 +69,12 @@ RSpec.describe Api::V1::MerchantsController, type: :controller do
   end
 
   describe "GET #index.json with created_at" do
-    let(:json_response) { JSON.parse(response.body)["merchants"] }
+    let(:json_response) { JSON.parse(response.body) }
     let(:merchants) { create_list(:merchant, 2, created_at: Date.today) }
     let(:merchant) { merchants.first }
 
     it "returns the specific merchant in JSON format" do
-      get :index, created_at: merchants.first.created_at, format: :json
+      get :index, created_at: merchants.first.created_at.to_json, format: :json
 
       expect(json_response.count).to eq(2)
       expect(json_response.first["id"]).to eq(merchants.first.id)
@@ -85,12 +85,12 @@ RSpec.describe Api::V1::MerchantsController, type: :controller do
   end
 
   describe "GET #index.json with updated_at" do
-    let(:json_response) { JSON.parse(response.body)["merchants"] }
+    let(:json_response) { JSON.parse(response.body) }
     let(:merchants) { create_list(:merchant, 2, updated_at: Date.today) }
     let(:merchant) { merchants.first }
 
     it "returns the specific merchant in JSON format" do
-      get :index, updated_at: merchants.first.updated_at, format: :json
+      get :index, updated_at: merchants.first.updated_at.to_json, format: :json
 
       expect(json_response.count).to eq(2)
       expect(json_response.first["id"]).to eq(merchants.first.id)
@@ -145,8 +145,9 @@ RSpec.describe Api::V1::MerchantsController, type: :controller do
     let(:merchants) { create_list(:merchant, 2) }
     let(:merchant) { merchants.first }
 
+
     it "returns the specific merchant in JSON format" do
-      get :show, created_at: merchant.created_at, format: :json
+      get :show, created_at: merchant.created_at.to_json, format: :json
 
       expect(json_response["id"]).to eq(merchant.id)
       expect(json_response["name"]).to eq(merchant.name)
@@ -159,7 +160,7 @@ RSpec.describe Api::V1::MerchantsController, type: :controller do
     let(:merchant) { merchants.first }
 
     it "returns the specific merchant in JSON format" do
-      get :show, updated_at: merchant.updated_at, format: :json
+      get :show, updated_at: merchant.updated_at.to_json, format: :json
 
       expect(json_response["id"]).to eq(merchant.id)
       expect(json_response["name"]).to eq(merchant.name)

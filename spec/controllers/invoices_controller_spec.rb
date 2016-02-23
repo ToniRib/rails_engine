@@ -2,7 +2,7 @@ require "rails_helper"
 
 RSpec.describe Api::V1::InvoicesController, type: :controller do
   describe "GET #index.json" do
-    let(:json_response) { JSON.parse(response.body)["invoices"] }
+    let(:json_response) { JSON.parse(response.body) }
 
     it "responds with successful 200 HTTP status code" do
       get :index, format: :json
@@ -104,7 +104,7 @@ RSpec.describe Api::V1::InvoicesController, type: :controller do
       expect(json_response["status"]).to eq(invoice.status)
     end
   end
-  
+
   describe "GET #show.json with updated_at" do
     let(:json_response) { JSON.parse(response.body) }
     let(:invoices) { create_list(:invoice, 2) }

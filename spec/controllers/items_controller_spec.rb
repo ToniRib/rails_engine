@@ -2,7 +2,7 @@ require "rails_helper"
 
 RSpec.describe Api::V1::ItemsController, type: :controller do
   describe "GET #index.json" do
-    let(:json_response) { JSON.parse(response.body)["items"] }
+    let(:json_response) { JSON.parse(response.body) }
 
     it "responds with successful 200 HTTP status code" do
       get :index, format: :json
