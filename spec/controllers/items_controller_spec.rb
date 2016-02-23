@@ -23,7 +23,7 @@ RSpec.describe Api::V1::ItemsController, type: :controller do
     end
   end
 
-  describe "GET #show.json" do
+  describe "GET #show.json with id" do
     let(:json_response) { JSON.parse(response.body) }
     let(:item) { create(:item) }
 
@@ -36,6 +36,108 @@ RSpec.describe Api::V1::ItemsController, type: :controller do
 
     it "returns the specific item in JSON format" do
       get :show, id: item.id, format: :json
+
+      expect(json_response["id"]).to eq(item.id)
+      expect(json_response["description"]).to eq(item.description)
+      expect(json_response["unit_price"]).to eq(item.unit_price)
+      expect(json_response["merchant_id"]).to eq(item.merchant_id)
+    end
+  end
+
+  describe "GET #show.json with name" do
+    let(:json_response) { JSON.parse(response.body) }
+    let(:item) { create(:item) }
+
+    it "returns the specific item in JSON format" do
+      get :show, name: item.name, format: :json
+
+      expect(json_response["id"]).to eq(item.id)
+      expect(json_response["description"]).to eq(item.description)
+      expect(json_response["unit_price"]).to eq(item.unit_price)
+      expect(json_response["merchant_id"]).to eq(item.merchant_id)
+    end
+
+    it "returns the specific item in JSON format - case insensitive" do
+      get :show, name: item.name.downcase, format: :json
+
+      expect(json_response["id"]).to eq(item.id)
+      expect(json_response["description"]).to eq(item.description)
+      expect(json_response["unit_price"]).to eq(item.unit_price)
+      expect(json_response["merchant_id"]).to eq(item.merchant_id)
+    end
+  end
+
+  describe "GET #show.json with description" do
+    let(:json_response) { JSON.parse(response.body) }
+    let(:item) { create(:item) }
+
+    it "returns the specific item in JSON format" do
+      get :show, description: item.description, format: :json
+
+      expect(json_response["id"]).to eq(item.id)
+      expect(json_response["description"]).to eq(item.description)
+      expect(json_response["unit_price"]).to eq(item.unit_price)
+      expect(json_response["merchant_id"]).to eq(item.merchant_id)
+    end
+
+    it "returns the specific item in JSON format - case insensitive" do
+      get :show, description: item.description.upcase, format: :json
+
+      expect(json_response["id"]).to eq(item.id)
+      expect(json_response["description"]).to eq(item.description)
+      expect(json_response["unit_price"]).to eq(item.unit_price)
+      expect(json_response["merchant_id"]).to eq(item.merchant_id)
+    end
+  end
+
+  describe "GET #show.json with unit_price" do
+    let(:json_response) { JSON.parse(response.body) }
+    let(:item) { create(:item) }
+
+    it "returns the specific item in JSON format" do
+      get :show, unit_price: item.unit_price, format: :json
+
+      expect(json_response["id"]).to eq(item.id)
+      expect(json_response["description"]).to eq(item.description)
+      expect(json_response["unit_price"]).to eq(item.unit_price)
+      expect(json_response["merchant_id"]).to eq(item.merchant_id)
+    end
+  end
+
+  describe "GET #show.json with merchant_id" do
+    let(:json_response) { JSON.parse(response.body) }
+    let(:item) { create(:item) }
+
+    it "returns the specific item in JSON format" do
+      get :show, merchant_id: item.merchant_id, format: :json
+
+      expect(json_response["id"]).to eq(item.id)
+      expect(json_response["description"]).to eq(item.description)
+      expect(json_response["unit_price"]).to eq(item.unit_price)
+      expect(json_response["merchant_id"]).to eq(item.merchant_id)
+    end
+  end
+
+  describe "GET #show.json with created_at" do
+    let(:json_response) { JSON.parse(response.body) }
+    let(:item) { create(:item) }
+
+    it "returns the specific item in JSON format" do
+      get :show, created_at: item.created_at, format: :json
+
+      expect(json_response["id"]).to eq(item.id)
+      expect(json_response["description"]).to eq(item.description)
+      expect(json_response["unit_price"]).to eq(item.unit_price)
+      expect(json_response["merchant_id"]).to eq(item.merchant_id)
+    end
+  end
+
+  describe "GET #show.json with updated_at" do
+    let(:json_response) { JSON.parse(response.body) }
+    let(:item) { create(:item) }
+
+    it "returns the specific item in JSON format" do
+      get :show, updated_at: item.updated_at, format: :json
 
       expect(json_response["id"]).to eq(item.id)
       expect(json_response["description"]).to eq(item.description)
