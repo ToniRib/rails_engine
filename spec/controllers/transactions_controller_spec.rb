@@ -23,7 +23,7 @@ RSpec.describe Api::V1::TransactionsController, type: :controller do
     end
   end
 
-  describe "GET #show.json" do
+  describe "GET #show.json with id" do
     let(:json_response) { JSON.parse(response.body) }
     let(:transaction) { create(:transaction) }
 
@@ -36,6 +36,76 @@ RSpec.describe Api::V1::TransactionsController, type: :controller do
 
     it "returns the specific transaction in JSON format" do
       get :show, id: transaction.id, format: :json
+
+      expect(json_response["id"]).to eq(transaction.id)
+      expect(json_response["invoice_id"]).to eq(transaction.invoice_id)
+      expect(json_response["credit_card_number"]).to eq(transaction.credit_card_number)
+      expect(json_response["result"]).to eq(transaction.result)
+    end
+  end
+
+  describe "GET #show.json with invoice_id" do
+    let(:json_response) { JSON.parse(response.body) }
+    let(:transaction) { create(:transaction) }
+
+    it "returns the specific transaction in JSON format" do
+      get :show, invoice_id: transaction.invoice_id, format: :json
+
+      expect(json_response["id"]).to eq(transaction.id)
+      expect(json_response["invoice_id"]).to eq(transaction.invoice_id)
+      expect(json_response["credit_card_number"]).to eq(transaction.credit_card_number)
+      expect(json_response["result"]).to eq(transaction.result)
+    end
+  end
+
+  describe "GET #show.json with credit_card_number" do
+    let(:json_response) { JSON.parse(response.body) }
+    let(:transaction) { create(:transaction) }
+
+    it "returns the specific transaction in JSON format" do
+      get :show, credit_card_number: transaction.credit_card_number, format: :json
+
+      expect(json_response["id"]).to eq(transaction.id)
+      expect(json_response["invoice_id"]).to eq(transaction.invoice_id)
+      expect(json_response["credit_card_number"]).to eq(transaction.credit_card_number)
+      expect(json_response["result"]).to eq(transaction.result)
+    end
+  end
+
+  describe "GET #show.json with result" do
+    let(:json_response) { JSON.parse(response.body) }
+    let(:transaction) { create(:transaction) }
+
+    it "returns the specific transaction in JSON format" do
+      get :show, result: transaction.result, format: :json
+
+      expect(json_response["id"]).to eq(transaction.id)
+      expect(json_response["invoice_id"]).to eq(transaction.invoice_id)
+      expect(json_response["credit_card_number"]).to eq(transaction.credit_card_number)
+      expect(json_response["result"]).to eq(transaction.result)
+    end
+  end
+
+  describe "GET #show.json with created_at" do
+    let(:json_response) { JSON.parse(response.body) }
+    let(:transaction) { create(:transaction) }
+
+    it "returns the specific transaction in JSON format" do
+      get :show, created_at: transaction.created_at, format: :json
+
+      expect(json_response["id"]).to eq(transaction.id)
+      expect(json_response["invoice_id"]).to eq(transaction.invoice_id)
+      expect(json_response["credit_card_number"]).to eq(transaction.credit_card_number)
+      expect(json_response["result"]).to eq(transaction.result)
+    end
+  end
+
+  describe "GET #show.json with updated_at" do
+    let(:json_response) { JSON.parse(response.body) }
+    let(:transaction) { create(:transaction) }
+
+    it "returns the specific transaction in JSON format" do
+      get :show, updated_at: transaction.updated_at, format: :json
 
       expect(json_response["id"]).to eq(transaction.id)
       expect(json_response["invoice_id"]).to eq(transaction.invoice_id)

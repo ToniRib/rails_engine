@@ -4,10 +4,10 @@ class InvoiceItemFinder
   end
 
   def self.sanitize(params)
-    params.select { |k, _| invoice_params.include?(k) }
+    params.select { |k, _| invoice_item_params.include?(k) }
   end
 
-  def self.invoice_params
+  def self.invoice_item_params
     [
       :id,
       :item_id,
