@@ -8,6 +8,7 @@ RSpec.describe Api::V1::MerchantsController, type: :controller do
       get :index, format: :json
 
       expect(response).to be_success
+      expect(response).to have_http_status(200)
     end
 
     it "returns all of the merchants in JSON format" do

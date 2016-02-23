@@ -8,6 +8,7 @@ RSpec.describe Api::V1::InvoiceItemsController, type: :controller do
       get :index, format: :json
 
       expect(response).to be_success
+      expect(response).to have_http_status(200)
     end
 
     it "returns all of the customers in JSON format" do
@@ -30,6 +31,7 @@ RSpec.describe Api::V1::InvoiceItemsController, type: :controller do
       get :show, id: invoice_item.id, format: :json
 
       expect(response).to be_success
+      expect(response).to have_http_status(200)
     end
 
     it "returns the specific invoice_item in JSON format" do
