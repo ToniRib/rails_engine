@@ -88,7 +88,7 @@ RSpec.describe Api::V1::InvoicesController, type: :controller do
 
     it "returns all of the customers in JSON format" do
       invoices = create_list(:invoice, 2, created_at: Date.today)
-      get :index, created_at: Date.today, format: :json
+      get :index, created_at: Date.today.to_json, format: :json
 
       expect(json_response.count).to eq(2)
       expect(json_response.first["id"]).to eq(invoices.first.id)
@@ -101,7 +101,7 @@ RSpec.describe Api::V1::InvoicesController, type: :controller do
 
     it "returns all of the customers in JSON format" do
       invoices = create_list(:invoice, 2, updated_at: Date.today)
-      get :index, updated_at: Date.today, format: :json
+      get :index, updated_at: Date.today.to_json, format: :json
 
       expect(json_response.count).to eq(2)
       expect(json_response.first["id"]).to eq(invoices.first.id)
