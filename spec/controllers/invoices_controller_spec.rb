@@ -11,7 +11,7 @@ RSpec.describe Api::V1::InvoicesController, type: :controller do
       expect(response).to have_http_status(200)
     end
 
-    it "returns all of the customers in JSON format" do
+    it "returns all of the invoices in JSON format" do
       invoices = create_list(:invoice, 2)
       get :index, format: :json
 
@@ -26,7 +26,7 @@ RSpec.describe Api::V1::InvoicesController, type: :controller do
   describe "GET #index.json with id" do
     let(:json_response) { JSON.parse(response.body) }
 
-    it "returns all of the customers in JSON format" do
+    it "returns all of the invoices in JSON format" do
       invoices = create_list(:invoice, 2)
       get :index, id: invoices.first.id, format: :json
 
@@ -39,7 +39,7 @@ RSpec.describe Api::V1::InvoicesController, type: :controller do
   describe "GET #index.json with customer_id" do
     let(:json_response) { JSON.parse(response.body) }
 
-    it "returns all of the customers in JSON format" do
+    it "returns all of the invoices in JSON format" do
       customer = create(:customer)
       invoices = create_list(:invoice, 2, customer_id: customer.id)
       get :index, customer_id: customer.id, format: :json
@@ -55,7 +55,7 @@ RSpec.describe Api::V1::InvoicesController, type: :controller do
   describe "GET #index.json with merchant_id" do
     let(:json_response) { JSON.parse(response.body) }
 
-    it "returns all of the customers in JSON format" do
+    it "returns all of the invoices in JSON format" do
       merchant = create(:merchant)
       invoices = create_list(:invoice, 2, merchant_id: merchant.id)
       get :index, merchant_id: merchant.id, format: :json
@@ -71,7 +71,7 @@ RSpec.describe Api::V1::InvoicesController, type: :controller do
   describe "GET #index.json with status" do
     let(:json_response) { JSON.parse(response.body) }
 
-    it "returns all of the customers in JSON format" do
+    it "returns all of the invoices in JSON format" do
       invoices = create_list(:invoice, 2, status: "shipped")
       get :index, status: "shipped", format: :json
 
@@ -86,7 +86,7 @@ RSpec.describe Api::V1::InvoicesController, type: :controller do
   describe "GET #index.json with created_at" do
     let(:json_response) { JSON.parse(response.body) }
 
-    it "returns all of the customers in JSON format" do
+    it "returns all of the invoices in JSON format" do
       invoices = create_list(:invoice, 2, created_at: Date.today)
       get :index, created_at: Date.today.to_json, format: :json
 
@@ -99,7 +99,7 @@ RSpec.describe Api::V1::InvoicesController, type: :controller do
   describe "GET #index.json with updated_at" do
     let(:json_response) { JSON.parse(response.body) }
 
-    it "returns all of the customers in JSON format" do
+    it "returns all of the invoices in JSON format" do
       invoices = create_list(:invoice, 2, updated_at: Date.today)
       get :index, updated_at: Date.today.to_json, format: :json
 

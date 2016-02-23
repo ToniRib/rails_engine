@@ -11,7 +11,7 @@ RSpec.describe Api::V1::TransactionsController, type: :controller do
       expect(response).to have_http_status(200)
     end
 
-    it "returns all of the customers in JSON format" do
+    it "returns all of the transactions in JSON format" do
       transactions = create_list(:transaction, 2)
       get :index, format: :json
 
@@ -26,7 +26,7 @@ RSpec.describe Api::V1::TransactionsController, type: :controller do
   describe "GET #index.json with id" do
     let(:json_response) { JSON.parse(response.body) }
 
-    it "returns all of the customers in JSON format" do
+    it "returns all of the transactions in JSON format" do
       transactions = create_list(:transaction, 2)
       get :index, id: transactions.first.id, format: :json
 
@@ -39,7 +39,7 @@ RSpec.describe Api::V1::TransactionsController, type: :controller do
   describe "GET #index.json with invoice_id" do
     let(:json_response) { JSON.parse(response.body) }
 
-    it "returns all of the customers in JSON format" do
+    it "returns all of the transactions in JSON format" do
       invoice = create(:invoice)
       transactions = create_list(:transaction, 2, invoice_id: invoice.id)
       get :index, invoice_id: invoice.id, format: :json
@@ -55,7 +55,7 @@ RSpec.describe Api::V1::TransactionsController, type: :controller do
   describe "GET #index.json with credit_card_number" do
     let(:json_response) { JSON.parse(response.body) }
 
-    it "returns all of the customers in JSON format" do
+    it "returns all of the transactions in JSON format" do
       transactions = create_list(:transaction, 2, credit_card_number: "4242424242424242")
       get :index, credit_card_number: "4242424242424242", format: :json
 
@@ -70,7 +70,7 @@ RSpec.describe Api::V1::TransactionsController, type: :controller do
   describe "GET #index.json with result" do
     let(:json_response) { JSON.parse(response.body) }
 
-    it "returns all of the customers in JSON format" do
+    it "returns all of the transactions in JSON format" do
       transactions = create_list(:transaction, 2, result: "success")
       get :index, result: "success", format: :json
 
@@ -85,7 +85,7 @@ RSpec.describe Api::V1::TransactionsController, type: :controller do
   describe "GET #index.json with created_at" do
     let(:json_response) { JSON.parse(response.body) }
 
-    it "returns all of the customers in JSON format" do
+    it "returns all of the transactions in JSON format" do
       transactions = create_list(:transaction, 2, created_at: Date.today)
       get :index, created_at: Date.today, format: :json
 
@@ -98,7 +98,7 @@ RSpec.describe Api::V1::TransactionsController, type: :controller do
   describe "GET #index.json with updated_at" do
     let(:json_response) { JSON.parse(response.body) }
 
-    it "returns all of the customers in JSON format" do
+    it "returns all of the transactions in JSON format" do
       transactions = create_list(:transaction, 2, updated_at: Date.today)
       get :index, updated_at: Date.today, format: :json
 

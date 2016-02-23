@@ -11,7 +11,7 @@ RSpec.describe Api::V1::InvoiceItemsController, type: :controller do
       expect(response).to have_http_status(200)
     end
 
-    it "returns all of the customers in JSON format" do
+    it "returns all of the invoice items in JSON format" do
       invoice_items = create_list(:invoice_item, 2)
       get :index, format: :json
 
@@ -26,7 +26,7 @@ RSpec.describe Api::V1::InvoiceItemsController, type: :controller do
   describe "GET #index.json with id" do
     let(:json_response) { JSON.parse(response.body) }
 
-    it "returns all of the customers in JSON format" do
+    it "returns all of the invoice items in JSON format" do
       invoice_items = create_list(:invoice_item, 2)
       get :index, id: invoice_items.first.id, format: :json
 
@@ -39,7 +39,7 @@ RSpec.describe Api::V1::InvoiceItemsController, type: :controller do
   describe "GET #index.json with item_id" do
     let(:json_response) { JSON.parse(response.body) }
 
-    it "returns all of the customers in JSON format" do
+    it "returns all of the invoice items in JSON format" do
       item = create(:item)
       invoice_items = create_list(:invoice_item, 2, item_id: item.id)
       get :index, item_id: item.id, format: :json
@@ -55,7 +55,7 @@ RSpec.describe Api::V1::InvoiceItemsController, type: :controller do
   describe "GET #index.json with invoice_id" do
     let(:json_response) { JSON.parse(response.body) }
 
-    it "returns all of the customers in JSON format" do
+    it "returns all of the invoice items in JSON format" do
       invoice = create(:invoice)
       invoice_items = create_list(:invoice_item, 2, invoice_id: invoice.id)
       get :index, invoice_id: invoice.id, format: :json
@@ -71,7 +71,7 @@ RSpec.describe Api::V1::InvoiceItemsController, type: :controller do
   describe "GET #index.json with quantity" do
     let(:json_response) { JSON.parse(response.body) }
 
-    it "returns all of the customers in JSON format" do
+    it "returns all of the invoice items in JSON format" do
       invoice_items = create_list(:invoice_item, 2, quantity: 2)
       get :index, quantity: 2, format: :json
 
@@ -86,7 +86,7 @@ RSpec.describe Api::V1::InvoiceItemsController, type: :controller do
   describe "GET #index.json with unit_price" do
     let(:json_response) { JSON.parse(response.body) }
 
-    it "returns all of the customers in JSON format" do
+    it "returns all of the invoice items in JSON format" do
       invoice_items = create_list(:invoice_item, 2, unit_price: "123.45")
       get :index, unit_price: "123.45", format: :json
 
@@ -101,7 +101,7 @@ RSpec.describe Api::V1::InvoiceItemsController, type: :controller do
   describe "GET #index.json with unit_price" do
     let(:json_response) { JSON.parse(response.body) }
 
-    it "returns all of the customers in JSON format" do
+    it "returns all of the invoice items in JSON format" do
       invoice_items = create_list(:invoice_item, 2)
       get :index, created_at: Date.today, format: :json
 
@@ -116,7 +116,7 @@ RSpec.describe Api::V1::InvoiceItemsController, type: :controller do
   describe "GET #index.json with unit_price" do
     let(:json_response) { JSON.parse(response.body) }
 
-    it "returns all of the customers in JSON format" do
+    it "returns all of the invoice items in JSON format" do
       invoice_items = create_list(:invoice_item, 2)
       get :index, updated_at: Date.today, format: :json
 

@@ -11,7 +11,7 @@ RSpec.describe Api::V1::ItemsController, type: :controller do
       expect(response).to have_http_status(200)
     end
 
-    it "returns all of the customers in JSON format" do
+    it "returns all of the items in JSON format" do
       items = create_list(:item, 2)
       get :index, format: :json
 
@@ -26,7 +26,7 @@ RSpec.describe Api::V1::ItemsController, type: :controller do
   describe "GET #index.json with id" do
     let(:json_response) { JSON.parse(response.body) }
 
-    it "returns all of the customers in JSON format" do
+    it "returns all of the items in JSON format" do
       items = create_list(:item, 2)
       get :index, id: items.first.id, format: :json
 
@@ -39,7 +39,7 @@ RSpec.describe Api::V1::ItemsController, type: :controller do
   describe "GET #index.json with name" do
     let(:json_response) { JSON.parse(response.body) }
 
-    it "returns all of the customers in JSON format" do
+    it "returns all of the items in JSON format" do
       items = create_list(:item, 2, name: "Paperclips")
       get :index, name: "Paperclips", format: :json
 
@@ -50,7 +50,7 @@ RSpec.describe Api::V1::ItemsController, type: :controller do
       expect(json_response.last["id"]).to eq(items.last.id)
     end
 
-    it "returns all of the customers in JSON format - case insensitive" do
+    it "returns all of the items in JSON format - case insensitive" do
       items = create_list(:item, 2, name: "Paperclips")
       get :index, name: "Paperclips".upcase, format: :json
 
@@ -65,7 +65,7 @@ RSpec.describe Api::V1::ItemsController, type: :controller do
   describe "GET #index.json with description" do
     let(:json_response) { JSON.parse(response.body) }
 
-    it "returns all of the customers in JSON format" do
+    it "returns all of the items in JSON format" do
       items = create_list(:item, 2, description: "Paperclips")
       get :index, description: "Paperclips", format: :json
 
@@ -76,7 +76,7 @@ RSpec.describe Api::V1::ItemsController, type: :controller do
       expect(json_response.last["id"]).to eq(items.last.id)
     end
 
-    it "returns all of the customers in JSON format - case insensitive" do
+    it "returns all of the items in JSON format - case insensitive" do
       items = create_list(:item, 2, description: "Paperclips")
       get :index, description: "Paperclips".upcase, format: :json
 
@@ -91,7 +91,7 @@ RSpec.describe Api::V1::ItemsController, type: :controller do
   describe "GET #index.json with unit_price" do
     let(:json_response) { JSON.parse(response.body) }
 
-    it "returns all of the customers in JSON format" do
+    it "returns all of the items in JSON format" do
       items = create_list(:item, 2, unit_price: "123.45")
       get :index, unit_price: "123.45", format: :json
 
@@ -106,7 +106,7 @@ RSpec.describe Api::V1::ItemsController, type: :controller do
   describe "GET #index.json with merchant_id" do
     let(:json_response) { JSON.parse(response.body) }
 
-    it "returns all of the customers in JSON format" do
+    it "returns all of the items in JSON format" do
       merchant = create(:merchant)
       items = create_list(:item, 2, merchant_id: merchant.id)
       get :index, merchant_id: merchant.id, format: :json
@@ -122,7 +122,7 @@ RSpec.describe Api::V1::ItemsController, type: :controller do
   describe "GET #index.json with created_at" do
     let(:json_response) { JSON.parse(response.body) }
 
-    it "returns all of the customers in JSON format" do
+    it "returns all of the items in JSON format" do
       items = create_list(:item, 2, created_at: Date.today)
       get :index, created_at: Date.today, format: :json
 
@@ -135,7 +135,7 @@ RSpec.describe Api::V1::ItemsController, type: :controller do
   describe "GET #index.json with updated_at" do
     let(:json_response) { JSON.parse(response.body) }
 
-    it "returns all of the customers in JSON format" do
+    it "returns all of the items in JSON format" do
       items = create_list(:item, 2, updated_at: Date.today)
       get :index, updated_at: Date.today, format: :json
 
