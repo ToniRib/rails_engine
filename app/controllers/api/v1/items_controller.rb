@@ -6,6 +6,6 @@ class Api::V1::ItemsController < ApplicationController
   end
 
   def show
-    respond_with ItemFinder.locate(params)
+    respond_with ItemFinder.locate_one(params)
   end
 end

@@ -1,7 +1,6 @@
 class ItemFinder
-  def self.locate(params)
-    params = sanitize(params)
-    Item.find_by(params)
+  def self.locate_one(params)
+    Item.find_by(sanitize(params))
   end
 
   def self.sanitize(params)
