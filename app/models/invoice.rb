@@ -6,6 +6,4 @@ class Invoice < ActiveRecord::Base
   has_many :transactions
 
   default_scope { order(id: :asc) }
-
-  enum status: %w(shipped)
 end

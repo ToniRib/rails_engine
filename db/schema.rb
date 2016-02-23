@@ -38,9 +38,9 @@ ActiveRecord::Schema.define(version: 20160223002425) do
   create_table "invoices", force: :cascade do |t|
     t.integer  "customer_id"
     t.integer  "merchant_id"
-    t.integer  "status",      default: 0
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
+    t.string   "status"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
   add_index "invoices", ["customer_id"], name: "index_invoices_on_customer_id", using: :btree
@@ -66,7 +66,7 @@ ActiveRecord::Schema.define(version: 20160223002425) do
   create_table "transactions", force: :cascade do |t|
     t.integer  "invoice_id"
     t.string   "credit_card_number"
-    t.integer  "result"
+    t.string   "result"
     t.datetime "created_at",         null: false
     t.datetime "updated_at",         null: false
   end
