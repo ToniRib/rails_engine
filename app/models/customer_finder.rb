@@ -12,4 +12,18 @@ class CustomerFinder
       Customer.find_by("updated_at = ?", params[:updated_at])
     end
   end
+
+  def self.find_multiple(params)
+    if params[:id]
+      Customer.where("id = ?", params[:id])
+    elsif params[:first_name]
+      Customer.where("first_name ILIKE ?", params[:first_name])
+    elsif params[:last_name]
+      Customer.where("last_name ILIKE ?", params[:last_name])
+    elsif params[:created_at]
+      Customer.where("created_at = ?", params[:created_at])
+    elsif params[:updated_at]
+      Customer.where("updated_at = ?", params[:updated_at])
+    end
+  end
 end

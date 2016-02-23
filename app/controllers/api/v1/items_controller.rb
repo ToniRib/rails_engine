@@ -6,6 +6,6 @@ class Api::V1::ItemsController < ApplicationController
   end
 
   def show
-    respond_with ItemFinder.find_single_item(params)
+    respond_with ItemFinder.find_single(params)
   end
 end
