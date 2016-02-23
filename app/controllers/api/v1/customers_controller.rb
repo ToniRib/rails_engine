@@ -5,12 +5,12 @@ class Api::V1::CustomersController < ApplicationController
     if customer_params.empty?
       respond_with Customer.all
     else
-      respond_with CustomerFinder.find_multiple(customer_params)
+      respond_with Customer.where(customer_params)
     end
   end
 
   def show
-    respond_with CustomerFinder.find_single(customer_params)
+    respond_with Customer.find_by(customer_params)
   end
 
   private

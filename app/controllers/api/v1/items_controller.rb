@@ -5,12 +5,12 @@ class Api::V1::ItemsController < ApplicationController
     if item_params.empty?
       respond_with Item.all
     else
-      respond_with ItemFinder.find_multiple(item_params)
+      respond_with Item.where(item_params)
     end
   end
 
   def show
-    respond_with ItemFinder.find_single(item_params)
+    respond_with Item.find_by(item_params)
   end
 
   private

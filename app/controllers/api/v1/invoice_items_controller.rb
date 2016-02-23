@@ -5,12 +5,12 @@ class Api::V1::InvoiceItemsController < ApplicationController
     if invoice_item_params.empty?
       respond_with InvoiceItem.all
     else
-      respond_with InvoiceItemFinder.find_multiple(invoice_item_params)
+      respond_with InvoiceItem.where(invoice_item_params)
     end
   end
 
   def show
-    respond_with InvoiceItemFinder.find_single(invoice_item_params)
+    respond_with InvoiceItem.find_by(invoice_item_params)
   end
 
   private

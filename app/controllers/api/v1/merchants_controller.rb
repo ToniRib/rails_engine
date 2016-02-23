@@ -5,12 +5,12 @@ class Api::V1::MerchantsController < ApplicationController
     if merchant_params.empty?
       respond_with Merchant.all
     else
-      respond_with MerchantFinder.find_multiple(merchant_params)
+      respond_with Merchant.where(merchant_params)
     end
   end
 
   def show
-    respond_with MerchantFinder.find_single(merchant_params)
+    respond_with Merchant.find_by(merchant_params)
   end
 
   private

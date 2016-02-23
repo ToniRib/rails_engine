@@ -5,12 +5,12 @@ class Api::V1::TransactionsController < ApplicationController
     if transaction_params.empty?
       respond_with Transaction.all
     else
-      respond_with TransactionFinder.find_multiple(transaction_params)
+      respond_with Transaction.where(transaction_params)
     end
   end
 
   def show
-    respond_with TransactionFinder.find_single(transaction_params)
+    respond_with Transaction.find_by(transaction_params)
   end
 
   private
