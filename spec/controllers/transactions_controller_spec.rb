@@ -23,7 +23,90 @@ RSpec.describe Api::V1::TransactionsController, type: :controller do
     end
   end
 
-  # Add the rest of the find_all tests here
+  describe "GET #index.json with id" do
+    let(:json_response) { JSON.parse(response.body) }
+
+    it "returns all of the customers in JSON format" do
+      transactions = create_list(:transaction, 2)
+      get :index, id: transactions.first.id, format: :json
+
+      expect(json_response.count).to eq(1)
+      expect(json_response.first["id"]).to eq(transactions.first.id)
+      expect(json_response.first["invoice_id"]).to eq(transactions.first.invoice_id)
+    end
+  end
+
+  describe "GET #index.json with invoice_id" do
+    let(:json_response) { JSON.parse(response.body) }
+
+    it "returns all of the customers in JSON format" do
+      invoice = create(:invoice)
+      transactions = create_list(:transaction, 2, invoice_id: invoice.id)
+      get :index, invoice_id: invoice.id, format: :json
+
+      expect(json_response.count).to eq(2)
+      expect(json_response.first["id"]).to eq(transactions.first.id)
+      expect(json_response.first["invoice_id"]).to eq(invoice.id)
+      expect(json_response.last["id"]).to eq(transactions.last.id)
+      expect(json_response.last["invoice_id"]).to eq(invoice.id)
+    end
+  end
+
+  describe "GET #index.json with credit_card_number" do
+    let(:json_response) { JSON.parse(response.body) }
+
+    it "returns all of the customers in JSON format" do
+      transactions = create_list(:transaction, 2, credit_card_number: "4242424242424242")
+      get :index, credit_card_number: "4242424242424242", format: :json
+
+      expect(json_response.count).to eq(2)
+      expect(json_response.first["id"]).to eq(transactions.first.id)
+      expect(json_response.first["credit_card_number"]).to eq("4242424242424242")
+      expect(json_response.last["id"]).to eq(transactions.last.id)
+      expect(json_response.last["credit_card_number"]).to eq("4242424242424242")
+    end
+  end
+
+  describe "GET #index.json with result" do
+    let(:json_response) { JSON.parse(response.body) }
+
+    it "returns all of the customers in JSON format" do
+      transactions = create_list(:transaction, 2, result: "success")
+      get :index, result: "success", format: :json
+
+      expect(json_response.count).to eq(2)
+      expect(json_response.first["id"]).to eq(transactions.first.id)
+      expect(json_response.first["result"]).to eq("success")
+      expect(json_response.last["id"]).to eq(transactions.last.id)
+      expect(json_response.last["result"]).to eq("success")
+    end
+  end
+
+  describe "GET #index.json with created_at" do
+    let(:json_response) { JSON.parse(response.body) }
+
+    it "returns all of the customers in JSON format" do
+      transactions = create_list(:transaction, 2, created_at: Date.today)
+      get :index, created_at: Date.today, format: :json
+
+      expect(json_response.count).to eq(2)
+      expect(json_response.first["id"]).to eq(transactions.first.id)
+      expect(json_response.last["id"]).to eq(transactions.last.id)
+    end
+  end
+
+  describe "GET #index.json with updated_at" do
+    let(:json_response) { JSON.parse(response.body) }
+
+    it "returns all of the customers in JSON format" do
+      transactions = create_list(:transaction, 2, updated_at: Date.today)
+      get :index, updated_at: Date.today, format: :json
+
+      expect(json_response.count).to eq(2)
+      expect(json_response.first["id"]).to eq(transactions.first.id)
+      expect(json_response.last["id"]).to eq(transactions.last.id)
+    end
+  end
 
   describe "GET #show.json with id" do
     let(:json_response) { JSON.parse(response.body) }
