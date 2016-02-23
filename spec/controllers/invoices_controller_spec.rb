@@ -23,7 +23,91 @@ RSpec.describe Api::V1::InvoicesController, type: :controller do
     end
   end
 
-  # Add the rest of the find_all tests here
+  describe "GET #index.json with id" do
+    let(:json_response) { JSON.parse(response.body) }
+
+    it "returns all of the customers in JSON format" do
+      invoices = create_list(:invoice, 2)
+      get :index, id: invoices.first.id, format: :json
+
+      expect(json_response.count).to eq(1)
+      expect(json_response.first["id"]).to eq(invoices.first.id)
+      expect(json_response.first["customer_id"]).to eq(invoices.first.customer_id)
+    end
+  end
+
+  describe "GET #index.json with customer_id" do
+    let(:json_response) { JSON.parse(response.body) }
+
+    it "returns all of the customers in JSON format" do
+      customer = create(:customer)
+      invoices = create_list(:invoice, 2, customer_id: customer.id)
+      get :index, customer_id: customer.id, format: :json
+
+      expect(json_response.count).to eq(2)
+      expect(json_response.first["id"]).to eq(invoices.first.id)
+      expect(json_response.first["customer_id"]).to eq(invoices.first.customer_id)
+      expect(json_response.last["id"]).to eq(invoices.last.id)
+      expect(json_response.last["customer_id"]).to eq(invoices.last.customer_id)
+    end
+  end
+
+  describe "GET #index.json with merchant_id" do
+    let(:json_response) { JSON.parse(response.body) }
+
+    it "returns all of the customers in JSON format" do
+      merchant = create(:merchant)
+      invoices = create_list(:invoice, 2, merchant_id: merchant.id)
+      get :index, merchant_id: merchant.id, format: :json
+
+      expect(json_response.count).to eq(2)
+      expect(json_response.first["id"]).to eq(invoices.first.id)
+      expect(json_response.first["merchant_id"]).to eq(invoices.first.merchant_id)
+      expect(json_response.last["id"]).to eq(invoices.last.id)
+      expect(json_response.last["merchant_id"]).to eq(invoices.last.merchant_id)
+    end
+  end
+
+  describe "GET #index.json with status" do
+    let(:json_response) { JSON.parse(response.body) }
+
+    it "returns all of the customers in JSON format" do
+      invoices = create_list(:invoice, 2, status: "shipped")
+      get :index, status: "shipped", format: :json
+
+      expect(json_response.count).to eq(2)
+      expect(json_response.first["id"]).to eq(invoices.first.id)
+      expect(json_response.first["status"]).to eq("shipped")
+      expect(json_response.last["id"]).to eq(invoices.last.id)
+      expect(json_response.last["status"]).to eq("shipped")
+    end
+  end
+
+  describe "GET #index.json with created_at" do
+    let(:json_response) { JSON.parse(response.body) }
+
+    it "returns all of the customers in JSON format" do
+      invoices = create_list(:invoice, 2, created_at: Date.today)
+      get :index, created_at: Date.today, format: :json
+
+      expect(json_response.count).to eq(2)
+      expect(json_response.first["id"]).to eq(invoices.first.id)
+      expect(json_response.last["id"]).to eq(invoices.last.id)
+    end
+  end
+
+  describe "GET #index.json with updated_at" do
+    let(:json_response) { JSON.parse(response.body) }
+
+    it "returns all of the customers in JSON format" do
+      invoices = create_list(:invoice, 2, updated_at: Date.today)
+      get :index, updated_at: Date.today, format: :json
+
+      expect(json_response.count).to eq(2)
+      expect(json_response.first["id"]).to eq(invoices.first.id)
+      expect(json_response.last["id"]).to eq(invoices.last.id)
+    end
+  end
 
   describe "GET #show.json with id" do
     let(:json_response) { JSON.parse(response.body) }
