@@ -10,6 +10,13 @@ FactoryGirl.define do
     last_name Faker::Name.last_name
   end
 
+  factory :item do
+    name Faker::Commerce.product_name
+    description Faker::Lorem.sentence(5)
+    unit_price 1000
+    merchant
+  end
+
   factory :invoice_item do
     item nil
     invoice nil
@@ -28,12 +35,5 @@ FactoryGirl.define do
     customer nil
     merchant nil
     status 1
-  end
-
-  factory :item do
-    name "MyString"
-    description "MyString"
-    unit_price 1
-    merchant nil
   end
 end
