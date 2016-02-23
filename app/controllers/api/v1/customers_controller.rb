@@ -15,9 +15,13 @@ class Api::V1::CustomersController < ApplicationController
     if params[:id]
       Customer.find(params[:id])
     elsif params[:first_name]
-      Customer.where("first_name ILIKE ?", params[:first_name]).first
+      Customer.find_by("first_name ILIKE ?", params[:first_name])
     elsif params[:last_name]
-      Customer.where("last_name ILIKE ?", params[:last_name]).first
+      Customer.find_by("last_name ILIKE ?", params[:last_name])
+    elsif params[:created_at]
+      Customer.find_by("created_at ILIKE ?", params[:created_at])
+    elsif params[:updated_at]
+      Customer.find_by("updated_at ILIKE ?", params[:updated_at])
     end
   end
 end

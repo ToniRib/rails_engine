@@ -4,8 +4,8 @@ class CreateInvoices < ActiveRecord::Migration
       t.references :customer, index: true, foreign_key: true
       t.references :merchant, index: true, foreign_key: true
       t.integer :status, default: 0
-
-      t.timestamps null: false
+      t.string :created_at
+      t.string :updated_at
     end
   end
 end

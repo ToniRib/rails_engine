@@ -2,8 +2,8 @@ class CreateMerchants < ActiveRecord::Migration
   def change
     create_table :merchants do |t|
       t.string :name
-
-      t.timestamps null: false
+      t.string :created_at
+      t.string :updated_at
     end
   end
 end
