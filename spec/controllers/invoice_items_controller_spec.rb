@@ -98,7 +98,35 @@ RSpec.describe Api::V1::InvoiceItemsController, type: :controller do
     end
   end
 
-  # Add the rest of the find_all tests here
+  describe "GET #index.json with unit_price" do
+    let(:json_response) { JSON.parse(response.body) }
+
+    it "returns all of the customers in JSON format" do
+      invoice_items = create_list(:invoice_item, 2)
+      get :index, created_at: Date.today, format: :json
+
+      expect(json_response.count).to eq(2)
+      expect(json_response.first["id"]).to eq(invoice_items.first.id)
+      expect(json_response.first["quantity"]).to eq(invoice_items.first.quantity)
+      expect(json_response.last["id"]).to eq(invoice_items.last.id)
+      expect(json_response.last["quantity"]).to eq(invoice_items.last.quantity)
+    end
+  end
+
+  describe "GET #index.json with unit_price" do
+    let(:json_response) { JSON.parse(response.body) }
+
+    it "returns all of the customers in JSON format" do
+      invoice_items = create_list(:invoice_item, 2)
+      get :index, updated_at: Date.today, format: :json
+
+      expect(json_response.count).to eq(2)
+      expect(json_response.first["id"]).to eq(invoice_items.first.id)
+      expect(json_response.first["quantity"]).to eq(invoice_items.first.quantity)
+      expect(json_response.last["id"]).to eq(invoice_items.last.id)
+      expect(json_response.last["quantity"]).to eq(invoice_items.last.quantity)
+    end
+  end
 
   describe "GET #show.json with id" do
     let(:json_response) { JSON.parse(response.body) }
