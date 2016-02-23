@@ -1,10 +1,11 @@
 class CreateTransactions < ActiveRecord::Migration
   def change
     create_table :transactions do |t|
+      enable_extension "citext"
+
       t.references :invoice, index: true, foreign_key: true
-      t.integer :credit_card_number
-      t.datetime :credit_card_expiration_date
-      t.string :result
+      t.citext :credit_card_number
+      t.citext :result
 
       t.timestamps null: false
     end

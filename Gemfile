@@ -1,4 +1,4 @@
-source "https://rubygems.org"
+source 'https://rubygems.org'
 gem 'rails', '4.2.5.1'
 gem 'bootstrap-sass', '~> 3.3.6'
 gem 'sass-rails', '~> 5.0'
@@ -10,7 +10,7 @@ gem 'bcrypt', '~> 3.1.7'
 gem 'figaro'
 gem 'pg'
 gem 'responders'
-gem "active_model_serializers", github: "rails-api/active_model_serializers"
+gem 'active_model_serializers', github: 'rails-api/active_model_serializers'
 
 group :development, :test do
   gem 'pry'
