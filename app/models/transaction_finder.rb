@@ -9,9 +9,9 @@ class TransactionFinder
     elsif params[:result]
       Transaction.find_by(result: params[:result])
     elsif params[:created_at]
-      Transaction.find_by("created_at ILIKE ?", params[:created_at])
+      Transaction.find_by(created_at: params[:created_at])
     elsif params[:updated_at]
-      Transaction.find_by("updated_at ILIKE ?", params[:updated_at])
+      Transaction.find_by(updated_at: params[:updated_at])
     end
   end
 end

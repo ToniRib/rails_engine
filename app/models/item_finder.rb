@@ -11,9 +11,9 @@ class ItemFinder
     elsif params[:merchant_id]
       Item.find_by(merchant_id: params[:merchant_id])
     elsif params[:created_at]
-      Item.find_by("created_at ILIKE ?", params[:created_at])
+      Item.find_by(created_at: params[:created_at])
     elsif params[:updated_at]
-      Item.find_by("updated_at ILIKE ?", params[:updated_at])
+      Item.find_by(updated_at: params[:updated_at])
     end
   end
 end

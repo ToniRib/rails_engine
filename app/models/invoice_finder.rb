@@ -9,9 +9,9 @@ class InvoiceFinder
     elsif params[:status]
       Invoice.find_by(status: params[:status])
     elsif params[:created_at]
-      Invoice.find_by("created_at ILIKE ?", params[:created_at])
+      Invoice.find_by(created_at: params[:created_at])
     elsif params[:updated_at]
-      Invoice.find_by("updated_at ILIKE ?", params[:updated_at])
+      Invoice.find_by(updated_at: params[:updated_at])
     end
   end
 end

@@ -5,9 +5,9 @@ class MerchantFinder
     elsif params[:name]
       Merchant.find_by("name ILIKE ?", params[:name])
     elsif params[:created_at]
-      Merchant.find_by("created_at ILIKE ?", params[:created_at])
+      Merchant.find_by(created_at: params[:created_at])
     elsif params[:updated_at]
-      Merchant.find_by("updated_at ILIKE ?", params[:updated_at])
+      Merchant.find_by(updated_at: params[:updated_at])
     end
   end
 end
