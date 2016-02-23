@@ -23,6 +23,128 @@ RSpec.describe Api::V1::ItemsController, type: :controller do
     end
   end
 
+  describe "GET #index.json with id" do
+    let(:json_response) { JSON.parse(response.body) }
+
+    it "returns all of the customers in JSON format" do
+      items = create_list(:item, 2)
+      get :index, id: items.first.id, format: :json
+
+      expect(json_response.count).to eq(1)
+      expect(json_response.first["name"]).to eq(items.first.name)
+      expect(json_response.first["id"]).to eq(items.first.id)
+    end
+  end
+
+  describe "GET #index.json with name" do
+    let(:json_response) { JSON.parse(response.body) }
+
+    it "returns all of the customers in JSON format" do
+      items = create_list(:item, 2, name: "Paperclips")
+      get :index, name: "Paperclips", format: :json
+
+      expect(json_response.count).to eq(2)
+      expect(json_response.first["name"]).to eq("Paperclips")
+      expect(json_response.first["id"]).to eq(items.first.id)
+      expect(json_response.last["name"]).to eq("Paperclips")
+      expect(json_response.last["id"]).to eq(items.last.id)
+    end
+
+    it "returns all of the customers in JSON format - case insensitive" do
+      items = create_list(:item, 2, name: "Paperclips")
+      get :index, name: "Paperclips".upcase, format: :json
+
+      expect(json_response.count).to eq(2)
+      expect(json_response.first["name"]).to eq("Paperclips")
+      expect(json_response.first["id"]).to eq(items.first.id)
+      expect(json_response.last["name"]).to eq("Paperclips")
+      expect(json_response.last["id"]).to eq(items.last.id)
+    end
+  end
+
+  describe "GET #index.json with description" do
+    let(:json_response) { JSON.parse(response.body) }
+
+    it "returns all of the customers in JSON format" do
+      items = create_list(:item, 2, description: "Paperclips")
+      get :index, description: "Paperclips", format: :json
+
+      expect(json_response.count).to eq(2)
+      expect(json_response.first["description"]).to eq("Paperclips")
+      expect(json_response.first["id"]).to eq(items.first.id)
+      expect(json_response.last["description"]).to eq("Paperclips")
+      expect(json_response.last["id"]).to eq(items.last.id)
+    end
+
+    it "returns all of the customers in JSON format - case insensitive" do
+      items = create_list(:item, 2, description: "Paperclips")
+      get :index, description: "Paperclips".upcase, format: :json
+
+      expect(json_response.count).to eq(2)
+      expect(json_response.first["description"]).to eq("Paperclips")
+      expect(json_response.first["id"]).to eq(items.first.id)
+      expect(json_response.last["description"]).to eq("Paperclips")
+      expect(json_response.last["id"]).to eq(items.last.id)
+    end
+  end
+
+  describe "GET #index.json with unit_price" do
+    let(:json_response) { JSON.parse(response.body) }
+
+    it "returns all of the customers in JSON format" do
+      items = create_list(:item, 2, unit_price: "123.45")
+      get :index, unit_price: "123.45", format: :json
+
+      expect(json_response.count).to eq(2)
+      expect(json_response.first["unit_price"]).to eq("123.45")
+      expect(json_response.first["id"]).to eq(items.first.id)
+      expect(json_response.last["unit_price"]).to eq("123.45")
+      expect(json_response.last["id"]).to eq(items.last.id)
+    end
+  end
+
+  describe "GET #index.json with merchant_id" do
+    let(:json_response) { JSON.parse(response.body) }
+
+    it "returns all of the customers in JSON format" do
+      merchant = create(:merchant)
+      items = create_list(:item, 2, merchant_id: merchant.id)
+      get :index, merchant_id: merchant.id, format: :json
+
+      expect(json_response.count).to eq(2)
+      expect(json_response.first["merchant_id"]).to eq(merchant.id)
+      expect(json_response.first["id"]).to eq(items.first.id)
+      expect(json_response.last["merchant_id"]).to eq(merchant.id)
+      expect(json_response.last["id"]).to eq(items.last.id)
+    end
+  end
+
+  describe "GET #index.json with created_at" do
+    let(:json_response) { JSON.parse(response.body) }
+
+    it "returns all of the customers in JSON format" do
+      items = create_list(:item, 2, created_at: Date.today)
+      get :index, created_at: Date.today, format: :json
+
+      expect(json_response.count).to eq(2)
+      expect(json_response.first["id"]).to eq(items.first.id)
+      expect(json_response.last["id"]).to eq(items.last.id)
+    end
+  end
+
+  describe "GET #index.json with updated_at" do
+    let(:json_response) { JSON.parse(response.body) }
+
+    it "returns all of the customers in JSON format" do
+      items = create_list(:item, 2, updated_at: Date.today)
+      get :index, updated_at: Date.today, format: :json
+
+      expect(json_response.count).to eq(2)
+      expect(json_response.first["id"]).to eq(items.first.id)
+      expect(json_response.last["id"]).to eq(items.last.id)
+    end
+  end
+
   # Add the rest of the find_all tests here
 
   describe "GET #show.json with id" do
