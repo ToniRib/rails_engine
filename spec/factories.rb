@@ -31,9 +31,12 @@ FactoryGirl.define do
   end
 
   factory :transaction do
-    invoice nil
-    credit_card_number "1234567812345678"
-    credit_card_expiration_date "2016-02-22 14:17:27"
-    result false
+    invoice
+    credit_card_number Faker::Business.credit_card_number.gsub!("-", "")
+    result
+  end
+
+  sequence :result, %w(success failed).cycle do |n|
+    n
   end
 end

@@ -24,7 +24,14 @@ namespace :db do
     end
 
     CSV.foreach("./vendor/assets/csvs/transactions.csv", headers: true) do |row|
-      Transaction.create(row.to_h)
+      result = row["result"] == "success" ? 0 : 1
+
+      Transaction.create(id: row["id"],
+                         invoice_id: row["invoice_id"],
+                         credit_card_number: row["credit_card_number"],
+                         result: result,
+                         created_at: row["created_at"],
+                         updated_at: row["updated_at"])
     end
   end
 end
