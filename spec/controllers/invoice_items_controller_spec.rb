@@ -23,6 +23,83 @@ RSpec.describe Api::V1::InvoiceItemsController, type: :controller do
     end
   end
 
+  describe "GET #index.json with id" do
+    let(:json_response) { JSON.parse(response.body) }
+
+    it "returns all of the customers in JSON format" do
+      invoice_items = create_list(:invoice_item, 2)
+      get :index, id: invoice_items.first.id, format: :json
+
+      expect(json_response.count).to eq(1)
+      expect(json_response.first["id"]).to eq(invoice_items.first.id)
+      expect(json_response.first["item_id"]).to eq(invoice_items.first.item_id)
+    end
+  end
+
+  describe "GET #index.json with item_id" do
+    let(:json_response) { JSON.parse(response.body) }
+
+    it "returns all of the customers in JSON format" do
+      item = create(:item)
+      invoice_items = create_list(:invoice_item, 2, item_id: item.id)
+      get :index, item_id: item.id, format: :json
+
+      expect(json_response.count).to eq(2)
+      expect(json_response.first["id"]).to eq(invoice_items.first.id)
+      expect(json_response.first["item_id"]).to eq(item.id)
+      expect(json_response.last["id"]).to eq(invoice_items.last.id)
+      expect(json_response.last["item_id"]).to eq(item.id)
+    end
+  end
+
+  describe "GET #index.json with invoice_id" do
+    let(:json_response) { JSON.parse(response.body) }
+
+    it "returns all of the customers in JSON format" do
+      invoice = create(:invoice)
+      invoice_items = create_list(:invoice_item, 2, invoice_id: invoice.id)
+      get :index, invoice_id: invoice.id, format: :json
+
+      expect(json_response.count).to eq(2)
+      expect(json_response.first["id"]).to eq(invoice_items.first.id)
+      expect(json_response.first["invoice_id"]).to eq(invoice.id)
+      expect(json_response.last["id"]).to eq(invoice_items.last.id)
+      expect(json_response.last["invoice_id"]).to eq(invoice.id)
+    end
+  end
+
+  describe "GET #index.json with quantity" do
+    let(:json_response) { JSON.parse(response.body) }
+
+    it "returns all of the customers in JSON format" do
+      invoice_items = create_list(:invoice_item, 2, quantity: 2)
+      get :index, quantity: 2, format: :json
+
+      expect(json_response.count).to eq(2)
+      expect(json_response.first["id"]).to eq(invoice_items.first.id)
+      expect(json_response.first["quantity"]).to eq(2)
+      expect(json_response.last["id"]).to eq(invoice_items.last.id)
+      expect(json_response.last["quantity"]).to eq(2)
+    end
+  end
+
+  describe "GET #index.json with unit_price" do
+    let(:json_response) { JSON.parse(response.body) }
+
+    it "returns all of the customers in JSON format" do
+      invoice_items = create_list(:invoice_item, 2, unit_price: "123.45")
+      get :index, unit_price: "123.45", format: :json
+
+      expect(json_response.count).to eq(2)
+      expect(json_response.first["id"]).to eq(invoice_items.first.id)
+      expect(json_response.first["unit_price"]).to eq("123.45")
+      expect(json_response.last["id"]).to eq(invoice_items.last.id)
+      expect(json_response.last["unit_price"]).to eq("123.45")
+    end
+  end
+
+  # Add the rest of the find_all tests here
+
   describe "GET #show.json with id" do
     let(:json_response) { JSON.parse(response.body) }
     let(:invoice_items) { create_list(:invoice_item, 2) }
@@ -116,7 +193,7 @@ RSpec.describe Api::V1::InvoiceItemsController, type: :controller do
     let(:invoice_item) { invoice_items.first }
 
     it "returns the specific invoice_item in JSON format" do
-      get :show, created_at: invoice_item.created_at, format: :json
+      get :show, created_at: invoice_item.created_at.to_json, format: :json
 
       expect(json_response["id"]).to eq(invoice_item.id)
       expect(json_response["item_id"]).to eq(invoice_item.item_id)
@@ -132,7 +209,7 @@ RSpec.describe Api::V1::InvoiceItemsController, type: :controller do
     let(:invoice_item) { invoice_items.first }
 
     it "returns the specific invoice_item in JSON format" do
-      get :show, updated_at: invoice_item.updated_at, format: :json
+      get :show, updated_at: invoice_item.updated_at.to_json, format: :json
 
       expect(json_response["id"]).to eq(invoice_item.id)
       expect(json_response["item_id"]).to eq(invoice_item.item_id)

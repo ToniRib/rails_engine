@@ -23,6 +23,8 @@ RSpec.describe Api::V1::ItemsController, type: :controller do
     end
   end
 
+  # Add the rest of the find_all tests here
+
   describe "GET #show.json with id" do
     let(:json_response) { JSON.parse(response.body) }
     let(:items) { create_list(:item, 2) }
@@ -129,7 +131,7 @@ RSpec.describe Api::V1::ItemsController, type: :controller do
     let(:item) { items.first }
 
     it "returns the specific item in JSON format" do
-      get :show, created_at: item.created_at, format: :json
+      get :show, created_at: item.created_at.to_json, format: :json
 
       expect(json_response["id"]).to eq(item.id)
       expect(json_response["description"]).to eq(item.description)
@@ -144,7 +146,7 @@ RSpec.describe Api::V1::ItemsController, type: :controller do
     let(:item) { items.first }
 
     it "returns the specific item in JSON format" do
-      get :show, updated_at: item.updated_at, format: :json
+      get :show, updated_at: item.updated_at.to_json, format: :json
 
       expect(json_response["id"]).to eq(item.id)
       expect(json_response["description"]).to eq(item.description)

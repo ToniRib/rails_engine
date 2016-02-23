@@ -17,7 +17,7 @@ FactoryGirl.define do
   factory :item do
     name Faker::Commerce.product_name
     description Faker::Lorem.sentence(5)
-    unit_price Faker::Number.number(5)
+    unit_price "283.45"
     merchant
     created_at Date.today
     updated_at Date.today
@@ -35,7 +35,7 @@ FactoryGirl.define do
     item
     invoice
     quantity Faker::Number.number(1)
-    unit_price Faker::Number.number(5)
+    unit_price "283.45"
     created_at Date.today
     updated_at Date.today
   end

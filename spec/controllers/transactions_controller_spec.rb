@@ -23,6 +23,8 @@ RSpec.describe Api::V1::TransactionsController, type: :controller do
     end
   end
 
+  # Add the rest of the find_all tests here
+
   describe "GET #show.json with id" do
     let(:json_response) { JSON.parse(response.body) }
     let(:transactions) { create_list(:transaction, 2) }
@@ -100,7 +102,7 @@ RSpec.describe Api::V1::TransactionsController, type: :controller do
 
 
     it "returns the specific transaction in JSON format" do
-      get :show, created_at: transaction.created_at, format: :json
+      get :show, created_at: transaction.created_at.to_json, format: :json
 
       expect(json_response["id"]).to eq(transaction.id)
       expect(json_response["invoice_id"]).to eq(transaction.invoice_id)
@@ -116,7 +118,7 @@ RSpec.describe Api::V1::TransactionsController, type: :controller do
 
 
     it "returns the specific transaction in JSON format" do
-      get :show, updated_at: transaction.updated_at, format: :json
+      get :show, updated_at: transaction.updated_at.to_json, format: :json
 
       expect(json_response["id"]).to eq(transaction.id)
       expect(json_response["invoice_id"]).to eq(transaction.invoice_id)

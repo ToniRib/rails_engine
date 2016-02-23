@@ -23,6 +23,8 @@ RSpec.describe Api::V1::InvoicesController, type: :controller do
     end
   end
 
+  # Add the rest of the find_all tests here
+
   describe "GET #show.json with id" do
     let(:json_response) { JSON.parse(response.body) }
     let(:invoices) { create_list(:invoice, 2) }
@@ -96,7 +98,7 @@ RSpec.describe Api::V1::InvoicesController, type: :controller do
     let(:invoice) { invoices.first }
 
     it "returns the specific invoice in JSON format" do
-      get :show, created_at: invoice.created_at, format: :json
+      get :show, created_at: invoice.created_at.to_json, format: :json
 
       expect(json_response["id"]).to eq(invoice.id)
       expect(json_response["customer_id"]).to eq(invoice.customer_id)
@@ -111,7 +113,7 @@ RSpec.describe Api::V1::InvoicesController, type: :controller do
     let(:invoice) { invoices.first }
 
     it "returns the specific invoice in JSON format" do
-      get :show, updated_at: invoice.updated_at, format: :json
+      get :show, updated_at: invoice.updated_at.to_json, format: :json
 
       expect(json_response["id"]).to eq(invoice.id)
       expect(json_response["customer_id"]).to eq(invoice.customer_id)

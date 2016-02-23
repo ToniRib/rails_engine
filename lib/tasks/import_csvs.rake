@@ -12,7 +12,14 @@ namespace :db do
     end
 
     CSV.foreach("./vendor/assets/csvs/items.csv", headers: true) do |row|
-      Item.create(row.to_h)
+      unit_price = (row["unit_price"].to_i / 100.to_f).to_s
+
+      Item.create(id:          row["id"],
+                  name:        row["name"],
+                  unit_price:  unit_price,
+                  merchant_id: row["merchant_id"],
+                  created_at:  row["created_at"],
+                  updated_at:  row["updated_at"])
     end
 
     CSV.foreach("./vendor/assets/csvs/invoices.csv", headers: true) do |row|
@@ -20,18 +27,26 @@ namespace :db do
     end
 
     CSV.foreach("./vendor/assets/csvs/invoice_items.csv", headers: true) do |row|
-      InvoiceItem.create(row.to_h)
+      unit_price = (row["unit_price"].to_i / 100.to_f).to_s
+
+      InvoiceItem.create(id:         row["id"],
+                         item_id:    row["item_id"],
+                         invoice_id: row["invoice_id"],
+                         quantity:   row["quantity"],
+                         unit_price: unit_price,
+                         created_at: row["created_at"],
+                         updated_at: row["updated_at"])
     end
 
     CSV.foreach("./vendor/assets/csvs/transactions.csv", headers: true) do |row|
       result = row["result"] == "success" ? 0 : 1
 
-      Transaction.create(id: row["id"],
-                         invoice_id: row["invoice_id"],
+      Transaction.create(id:                 row["id"],
+                         invoice_id:         row["invoice_id"],
                          credit_card_number: row["credit_card_number"],
-                         result: result,
-                         created_at: row["created_at"],
-                         updated_at: row["updated_at"])
+                         result:             result,
+                         created_at:         row["created_at"],
+                         updated_at:         row["updated_at"])
     end
   end
 end
