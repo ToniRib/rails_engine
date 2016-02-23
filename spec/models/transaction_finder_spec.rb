@@ -69,7 +69,6 @@ RSpec.describe TransactionFinder, type: :model do
     end
   end
 
-
   describe "#find_multiple" do
     it "finds one transaction by id" do
       load_transactions
