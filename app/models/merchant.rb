@@ -44,6 +44,11 @@ class Merchant < ActiveRecord::Base
     scoped.group(:id).reorder('number_of_transactions DESC').take(1).first
   end
 
+  def customers_with_pending_invoices
+    failed_invoices = invoices_with_failed_transactions
+    Customer.find(failed_invoices.pluck(:customer_id).uniq)
+  end
+
   private
 
   def self.select_id_name_and_revenue
@@ -66,5 +71,9 @@ class Merchant < ActiveRecord::Base
     customers.select('customers.id',
                      'COUNT(transactions.id) AS number_of_transactions')
              .joins(invoices: :transactions).where("result = 'success'")
+  end
+
+  def invoices_with_failed_transactions
+    invoices.joins(:transactions, :invoice_items).where("result = 'failed'")
   end
 end

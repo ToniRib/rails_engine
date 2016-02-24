@@ -13,6 +13,7 @@ Rails.application.routes.draw do
         get '/invoices', to: 'merchants/invoices#index'
         get '/revenue', to: 'merchants/revenues#show'
         get '/favorite_customer', to: 'merchants/merchants_favorite_customer#show'
+        get '/customers_with_pending_invoices', to: 'merchants/customers_with_pending_invoices#index'
       end
 
       get '/items/find_all', to: 'items#index'
