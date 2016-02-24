@@ -87,3 +87,32 @@ Shoulda::Matchers.configure do |config|
     with.library :rails
   end
 end
+
+def load_merchants_with_transactions
+  merchant1, merchant2, merchant3 = create_list(:merchant, 3)
+  customer1, customer2, customer3 = create_list(:customer, 3)
+  invoice1 = create(:invoice, merchant_id: merchant1.id,
+                    created_at: Date.today - 1, customer_id: customer1.id)
+  invoice2 = create(:invoice, merchant_id: merchant2.id, customer_id: customer2.id)
+  invoice3 = create(:invoice, merchant_id: merchant3.id, customer_id: customer3.id)
+  item1 = create(:item, merchant_id: merchant1.id)
+  item2 = create(:item, merchant_id: merchant2.id)
+  item3 = create(:item, merchant_id: merchant3.id)
+  invoice_item1 = create(:invoice_item, invoice_id: invoice1.id,
+                         quantity: 1, unit_price: 200,
+                         item_id: item1.id)
+  invoice_item2 = create(:invoice_item, invoice_id: invoice2.id,
+                         quantity: 2, unit_price: 300,
+                         item_id: item2.id)
+  invoice_item3 = create(:invoice_item, invoice_id: invoice3.id,
+                         quantity: 3, unit_price: 400,
+                         item_id: item3.id)
+  transaction1 = create(:transaction, invoice_id: invoice1.id,
+                        result: "success")
+  transaction2 = create(:transaction, invoice_id: invoice2.id,
+                        result: "success")
+  transaction3 = create(:transaction, invoice_id: invoice3.id,
+                        result: "success")
+
+  [merchant1, merchant2, merchant3]
+end
