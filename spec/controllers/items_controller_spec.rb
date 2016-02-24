@@ -145,8 +145,6 @@ RSpec.describe Api::V1::ItemsController, type: :controller do
     end
   end
 
-  # Add the rest of the find_all tests here
-
   describe "GET #show.json with id" do
     let(:json_response) { JSON.parse(response.body) }
     let(:items) { create_list(:item, 2) }
@@ -164,7 +162,7 @@ RSpec.describe Api::V1::ItemsController, type: :controller do
 
       expect(json_response["id"]).to eq(item.id)
       expect(json_response["description"]).to eq(item.description)
-      expect(json_response["unit_price"]).to eq(item.unit_price)
+      expect(json_response["unit_price"]).to eq(item.unit_price.to_s)
       expect(json_response["merchant_id"]).to eq(item.merchant_id)
     end
   end
@@ -179,7 +177,7 @@ RSpec.describe Api::V1::ItemsController, type: :controller do
 
       expect(json_response["id"]).to eq(item.id)
       expect(json_response["description"]).to eq(item.description)
-      expect(json_response["unit_price"]).to eq(item.unit_price)
+      expect(json_response["unit_price"]).to eq(item.unit_price.to_s)
       expect(json_response["merchant_id"]).to eq(item.merchant_id)
     end
 
@@ -188,7 +186,7 @@ RSpec.describe Api::V1::ItemsController, type: :controller do
 
       expect(json_response["id"]).to eq(item.id)
       expect(json_response["description"]).to eq(item.description)
-      expect(json_response["unit_price"]).to eq(item.unit_price)
+      expect(json_response["unit_price"]).to eq(item.unit_price.to_s)
       expect(json_response["merchant_id"]).to eq(item.merchant_id)
     end
   end
@@ -203,7 +201,7 @@ RSpec.describe Api::V1::ItemsController, type: :controller do
 
       expect(json_response["id"]).to eq(item.id)
       expect(json_response["description"]).to eq(item.description)
-      expect(json_response["unit_price"]).to eq(item.unit_price)
+      expect(json_response["unit_price"]).to eq(item.unit_price.to_s)
       expect(json_response["merchant_id"]).to eq(item.merchant_id)
     end
 
@@ -212,7 +210,7 @@ RSpec.describe Api::V1::ItemsController, type: :controller do
 
       expect(json_response["id"]).to eq(item.id)
       expect(json_response["description"]).to eq(item.description)
-      expect(json_response["unit_price"]).to eq(item.unit_price)
+      expect(json_response["unit_price"]).to eq(item.unit_price.to_s)
       expect(json_response["merchant_id"]).to eq(item.merchant_id)
     end
   end
@@ -223,11 +221,11 @@ RSpec.describe Api::V1::ItemsController, type: :controller do
     let(:item) { items.first }
 
     it "returns the specific item in JSON format" do
-      get :show, unit_price: item.unit_price, format: :json
+      get :show, unit_price: item.unit_price.to_s, format: :json
 
       expect(json_response["id"]).to eq(item.id)
       expect(json_response["description"]).to eq(item.description)
-      expect(json_response["unit_price"]).to eq(item.unit_price)
+      expect(json_response["unit_price"]).to eq(item.unit_price.to_s)
       expect(json_response["merchant_id"]).to eq(item.merchant_id)
     end
   end
@@ -242,7 +240,7 @@ RSpec.describe Api::V1::ItemsController, type: :controller do
 
       expect(json_response["id"]).to eq(item.id)
       expect(json_response["description"]).to eq(item.description)
-      expect(json_response["unit_price"]).to eq(item.unit_price)
+      expect(json_response["unit_price"]).to eq(item.unit_price.to_s)
       expect(json_response["merchant_id"]).to eq(item.merchant_id)
     end
   end
@@ -257,7 +255,7 @@ RSpec.describe Api::V1::ItemsController, type: :controller do
 
       expect(json_response["id"]).to eq(item.id)
       expect(json_response["description"]).to eq(item.description)
-      expect(json_response["unit_price"]).to eq(item.unit_price)
+      expect(json_response["unit_price"]).to eq(item.unit_price.to_s)
       expect(json_response["merchant_id"]).to eq(item.merchant_id)
     end
   end
@@ -272,7 +270,7 @@ RSpec.describe Api::V1::ItemsController, type: :controller do
 
       expect(json_response["id"]).to eq(item.id)
       expect(json_response["description"]).to eq(item.description)
-      expect(json_response["unit_price"]).to eq(item.unit_price)
+      expect(json_response["unit_price"]).to eq(item.unit_price.to_s)
       expect(json_response["merchant_id"]).to eq(item.merchant_id)
     end
   end

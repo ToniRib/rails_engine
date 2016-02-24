@@ -19,7 +19,7 @@ RSpec.describe Api::V1::InvoiceItems::ItemsController, type: :controller do
       expect(json_response["id"]).to eq(item.id)
       expect(json_response["name"]).to eq(item.name)
       expect(json_response["description"]).to eq(item.description)
-      expect(json_response["unit_price"]).to eq(item.unit_price)
+      expect(json_response["unit_price"]).to eq(item.unit_price.to_s)
       expect(json_response["merchant_id"]).to eq(item.merchant_id)
       expect(json_response["updated_at"].to_json).to eq(item.updated_at.to_json)
       expect(json_response["created_at"].to_json).to eq(item.created_at.to_json)

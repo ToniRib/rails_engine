@@ -8,10 +8,4 @@ class Merchant < ActiveRecord::Base
   def successful_transactions
     transactions.where(result: "success")
   end
-
-  def total_revenue
-    successful_transactions.map do |t|
-      t.invoice
-    end
-  end
 end

@@ -5,7 +5,7 @@ class CreateItems < ActiveRecord::Migration
 
       t.citext :name
       t.citext :description
-      t.citext :unit_price
+      t.decimal :unit_price, precision: 8, scale: 2
       t.references :merchant, index: true, foreign_key: true
 
       t.timestamps null: false

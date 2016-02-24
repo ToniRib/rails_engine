@@ -147,7 +147,7 @@ RSpec.describe Api::V1::InvoiceItemsController, type: :controller do
       expect(json_response["item_id"]).to eq(invoice_item.item_id)
       expect(json_response["invoice_id"]).to eq(invoice_item.invoice_id)
       expect(json_response["quantity"]).to eq(invoice_item.quantity)
-      expect(json_response["unit_price"]).to eq(invoice_item.unit_price)
+      expect(json_response["unit_price"]).to eq(invoice_item.unit_price.to_s)
     end
   end
 
@@ -163,7 +163,7 @@ RSpec.describe Api::V1::InvoiceItemsController, type: :controller do
       expect(json_response["item_id"]).to eq(invoice_item.item_id)
       expect(json_response["invoice_id"]).to eq(invoice_item.invoice_id)
       expect(json_response["quantity"]).to eq(invoice_item.quantity)
-      expect(json_response["unit_price"]).to eq(invoice_item.unit_price)
+      expect(json_response["unit_price"]).to eq(invoice_item.unit_price.to_s)
     end
   end
 
@@ -179,7 +179,7 @@ RSpec.describe Api::V1::InvoiceItemsController, type: :controller do
       expect(json_response["item_id"]).to eq(invoice_item.item_id)
       expect(json_response["invoice_id"]).to eq(invoice_item.invoice_id)
       expect(json_response["quantity"]).to eq(invoice_item.quantity)
-      expect(json_response["unit_price"]).to eq(invoice_item.unit_price)
+      expect(json_response["unit_price"]).to eq(invoice_item.unit_price.to_s)
     end
   end
 
@@ -195,7 +195,7 @@ RSpec.describe Api::V1::InvoiceItemsController, type: :controller do
       expect(json_response["item_id"]).to eq(invoice_item.item_id)
       expect(json_response["invoice_id"]).to eq(invoice_item.invoice_id)
       expect(json_response["quantity"]).to eq(invoice_item.quantity)
-      expect(json_response["unit_price"]).to eq(invoice_item.unit_price)
+      expect(json_response["unit_price"]).to eq(invoice_item.unit_price.to_s)
     end
   end
 
@@ -205,13 +205,13 @@ RSpec.describe Api::V1::InvoiceItemsController, type: :controller do
     let(:invoice_item) { invoice_items.first }
 
     it "returns the specific invoice_item in JSON format" do
-      get :show, unit_price: invoice_item.unit_price, format: :json
+      get :show, unit_price: invoice_item.unit_price.to_s, format: :json
 
       expect(json_response["id"]).to eq(invoice_item.id)
       expect(json_response["item_id"]).to eq(invoice_item.item_id)
       expect(json_response["invoice_id"]).to eq(invoice_item.invoice_id)
       expect(json_response["quantity"]).to eq(invoice_item.quantity)
-      expect(json_response["unit_price"]).to eq(invoice_item.unit_price)
+      expect(json_response["unit_price"]).to eq(invoice_item.unit_price.to_s)
     end
   end
 
@@ -227,7 +227,7 @@ RSpec.describe Api::V1::InvoiceItemsController, type: :controller do
       expect(json_response["item_id"]).to eq(invoice_item.item_id)
       expect(json_response["invoice_id"]).to eq(invoice_item.invoice_id)
       expect(json_response["quantity"]).to eq(invoice_item.quantity)
-      expect(json_response["unit_price"]).to eq(invoice_item.unit_price)
+      expect(json_response["unit_price"]).to eq(invoice_item.unit_price.to_s)
     end
   end
 
@@ -243,7 +243,7 @@ RSpec.describe Api::V1::InvoiceItemsController, type: :controller do
       expect(json_response["item_id"]).to eq(invoice_item.item_id)
       expect(json_response["invoice_id"]).to eq(invoice_item.invoice_id)
       expect(json_response["quantity"]).to eq(invoice_item.quantity)
-      expect(json_response["unit_price"]).to eq(invoice_item.unit_price)
+      expect(json_response["unit_price"]).to eq(invoice_item.unit_price.to_s)
     end
   end
 end

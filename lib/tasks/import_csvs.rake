@@ -12,7 +12,7 @@ namespace :db do
     end
 
     CSV.foreach("./vendor/assets/csvs/items.csv", headers: true) do |row|
-      unit_price = (row["unit_price"].to_i / 100.to_f).to_s
+      unit_price = row["unit_price"].to_i / 100.to_f
 
       Item.create(id:          row["id"],
                   name:        row["name"],
@@ -28,7 +28,7 @@ namespace :db do
     end
 
     CSV.foreach("./vendor/assets/csvs/invoice_items.csv", headers: true) do |row|
-      unit_price = (row["unit_price"].to_i / 100.to_f).to_s
+      unit_price = row["unit_price"].to_i / 100.to_f
 
       InvoiceItem.create(id:         row["id"],
                          item_id:    row["item_id"],
