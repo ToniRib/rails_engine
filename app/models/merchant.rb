@@ -10,6 +10,10 @@ class Merchant < ActiveRecord::Base
     select_id_name_and_revenue.joins(:invoices => [:merchant, :transactions, :invoice_items]).where("result='success'").group(:id).reorder('total_revenue DESC').take(num.to_i)
   end
 
+  def self.top_by_number_of_items_sold(num)
+    select_id_name_and_number_of_items.joins(:invoices => [:merchant, :transactions, :invoice_items]).where("result='success'").group(:id).reorder('number_of_items DESC').take(num.to_i)
+  end
+
   def total_revenue(date = nil)
     scoped = invoices_with_successful_transactions
     scoped = scoped.where("invoices.created_at = ?", date) if date
@@ -27,6 +31,12 @@ class Merchant < ActiveRecord::Base
     select("id",
            "name",
            "SUM(invoice_items.unit_price * invoice_items.quantity) AS total_revenue")
+  end
+
+  def self.select_id_name_and_number_of_items
+    select("id",
+           "name",
+           "SUM(invoice_items.quantity) AS number_of_items")
   end
 
   def invoices_with_successful_transactions
