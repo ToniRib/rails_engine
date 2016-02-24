@@ -10,7 +10,7 @@ class Merchant < ActiveRecord::Base
     invoices.joins(:transactions, :invoice_items).where("result = 'success'")
   end
 
-  def total_revenue(date)
+  def total_revenue(date = nil)
     scoped = invoices_with_successful_transactions
     scoped = scoped.where("invoices.created_at = ?", date) if date
     scoped.sum("unit_price * quantity").to_f
