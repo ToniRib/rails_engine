@@ -7,11 +7,20 @@ class Merchant < ActiveRecord::Base
   default_scope { order(id: :asc) }
 
   def self.top_by_revenue(num)
-    select_id_name_and_revenue.joins(:invoices => [:merchant, :transactions, :invoice_items]).where("result='success'").group(:id).reorder('total_revenue DESC').take(num.to_i)
+    select_id_name_and_revenue.joins(:invoices => [:transactions,
+                                                   :invoice_items])
+                              .where("result='success'")
+                              .group(:id)
+                              .reorder('total_revenue DESC')
+                              .take(num.to_i)
   end
 
   def self.top_by_number_of_items_sold(num)
     select_id_name_and_number_of_items.joins(:invoices => [:merchant, :transactions, :invoice_items]).where("result='success'").group(:id).reorder('number_of_items DESC').take(num.to_i)
+  end
+
+  def self.total_revenue_on_date(date)
+    select('SUM(invoice_items.unit_price * invoice_items.quantity) AS total_revenue').joins(:invoices => [:invoice_items, :transactions]).where("result = 'success'").where("invoices.created_at = ?", date).reorder('total_revenue').first['total_revenue'].to_f
   end
 
   def total_revenue(date = nil)

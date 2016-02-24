@@ -6,6 +6,7 @@ Rails.application.routes.draw do
       get '/merchants/find', to: 'merchants#show'
       get '/merchants/most_revenue', to: 'merchants/top_merchants_by_revenue#index'
       get '/merchants/most_items', to: 'merchants/top_merchants_by_items_sold#index'
+      get '/merchants/revenue', to: 'merchants/total_revenue_across_merchants_on_date#show'
 
       resources :merchants, only: [:index, :show] do
         get '/items', to: 'merchants/items#index'
