@@ -2,6 +2,6 @@ class Api::V1::Merchants::TopMerchantsByRevenueController < ApplicationControlle
   respond_to :json
 
   def index
-    render nothing: true
+    # binding.pry <- this is being hit for the correct endpoint
   end
 end
