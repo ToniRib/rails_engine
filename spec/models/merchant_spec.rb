@@ -47,21 +47,42 @@ RSpec.describe Merchant, type: :model do
     end
 
     it "returns total revenue for merchant for a specific date" do
+      merchant1, merchant2, merchant3 = load_merchants_with_transactions
 
+      expect(merchant1.total_revenue(Date.today - 1)).to eq(200)
+      expect(merchant2.total_revenue(Date.today)).to eq(600)
+      expect(merchant3.total_revenue(Date.today)).to eq(1200)
+    end
+  end
+
+  describe "#favorite_customer" do
+    it "returns a merchant's favorite customer" do
+      merchant1, merchant2, merchant3 = load_merchants_with_transactions
+
+      expect(merchant1.favorite_customer.id).to eq(170)
+      expect(merchant2.favorite_customer.id).to eq(171)
+      expect(merchant3.favorite_customer.id).to eq(172)
     end
   end
 
   def load_merchants_with_transactions
     merchant1, merchant2, merchant3 = create_list(:merchant, 3)
-    invoice1 = create(:invoice, merchant_id: merchant1.id, created_at: Date.today - 1)
+    invoice1 = create(:invoice, merchant_id: merchant1.id,
+                      created_at: Date.today - 1)
     invoice2 = create(:invoice, merchant_id: merchant2.id)
     invoice3 = create(:invoice, merchant_id: merchant3.id)
-    invoice_item1 = create(:invoice_item, invoice_id: invoice1.id, quantity: 1, unit_price: 200)
-    invoice_item2 = create(:invoice_item, invoice_id: invoice2.id, quantity: 2, unit_price: 300)
-    invoice_item3 = create(:invoice_item, invoice_id: invoice3.id, quantity: 3, unit_price: 400)
-    transaction1 = create(:transaction, invoice_id: invoice1.id, result: "success")
-    transaction2 = create(:transaction, invoice_id: invoice2.id, result: "success")
-    transaction3 = create(:transaction, invoice_id: invoice3.id, result: "success")
+    invoice_item1 = create(:invoice_item, invoice_id: invoice1.id,
+                           quantity: 1, unit_price: 200)
+    invoice_item2 = create(:invoice_item, invoice_id: invoice2.id,
+                           quantity: 2, unit_price: 300)
+    invoice_item3 = create(:invoice_item, invoice_id: invoice3.id,
+                           quantity: 3, unit_price: 400)
+    transaction1 = create(:transaction, invoice_id: invoice1.id,
+                          result: "success")
+    transaction2 = create(:transaction, invoice_id: invoice2.id,
+                          result: "success")
+    transaction3 = create(:transaction, invoice_id: invoice3.id,
+                          result: "success")
 
     [merchant1, merchant2, merchant3]
   end
