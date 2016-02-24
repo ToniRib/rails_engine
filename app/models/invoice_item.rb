@@ -4,6 +4,4 @@ class InvoiceItem < ActiveRecord::Base
   has_many :transactions, through: :invoice
 
   default_scope { order(id: :asc) }
-
-  scope :successful, -> { joins(:transactions).where("transactions.result" => "success") }
 end

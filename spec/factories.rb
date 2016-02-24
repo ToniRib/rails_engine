@@ -2,7 +2,7 @@ require "faker"
 
 FactoryGirl.define do
   factory :merchant do
-    name Faker::Company.name
+    name
     created_at Date.today
     updated_at Date.today
   end
@@ -17,7 +17,7 @@ FactoryGirl.define do
   factory :item do
     name Faker::Commerce.product_name
     description Faker::Lorem.sentence(5)
-    unit_price "283.45"
+    unit_price
     merchant
     created_at Date.today
     updated_at Date.today
@@ -35,7 +35,7 @@ FactoryGirl.define do
     item
     invoice
     quantity Faker::Number.number(1)
-    unit_price "283.45"
+    unit_price
     created_at Date.today
     updated_at Date.today
   end
@@ -50,5 +50,13 @@ FactoryGirl.define do
 
   sequence :result, %w(success failed).cycle do |n|
     n
+  end
+
+  sequence :unit_price do |i|
+    "#{i}.00"
+  end
+
+  sequence :name do |n|
+    "name#{n}"
   end
 end
