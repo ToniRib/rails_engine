@@ -37,6 +37,20 @@ RSpec.describe Merchant, type: :model do
     end
   end
 
+  describe "#total_revenue" do
+    it "returns total revenue for merchant without date" do
+      merchant1, merchant2, merchant3 = load_merchants_with_transactions
+
+      expect(merchant1.total_revenue).to eq(200)
+      expect(merchant2.total_revenue).to eq(600)
+      expect(merchant3.total_revenue).to eq(1200)
+    end
+
+    it "returns total revenue for merchant for a specific date" do
+
+    end
+  end
+
   def load_merchants_with_transactions
     merchant1, merchant2, merchant3 = create_list(:merchant, 3)
     invoice1 = create(:invoice, merchant_id: merchant1.id, created_at: Date.today - 1)
