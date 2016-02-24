@@ -4,7 +4,7 @@ RSpec.describe Api::V1::Merchants::InvoicesController, type: :controller do
   describe "GET #index.json" do
     let(:json_response) { JSON.parse(response.body) }
     let(:merchant) { create(:merchant) }
-    let(:invoices) { create_list(:invoice, 2)}
+    let(:invoices) { create_list(:invoice, 2) }
 
     it "responds with successful 200 HTTP status code" do
       merchant.invoices << invoices
