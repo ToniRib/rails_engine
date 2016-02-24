@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe Api::V1::Merchants::TopMerchantsByRevenueController, type: :controller do
+RSpec.describe Api::V1::Merchants::TopMerchantsByItemsSoldController, type: :controller do
   describe "GET #index.json" do
     let(:json_response) { JSON.parse(response.body) }
 
