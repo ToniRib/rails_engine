@@ -12,7 +12,8 @@ RSpec.describe Api::V1::Merchants::TopMerchantsByRevenueController, type: :contr
     end
 
     xit "returns all of the merchant's items in JSON format" do
-      merchant.items << items
+      set_up_merchants_with_transactions
+
       get :index, quantity: 3, format: :json
 
     end

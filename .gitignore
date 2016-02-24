@@ -17,3 +17,5 @@
 
 # Ignore test coverage files from SimpleCov
 /coverage
+
+test_sql.txt
