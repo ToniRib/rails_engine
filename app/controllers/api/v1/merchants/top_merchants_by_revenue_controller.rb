@@ -2,7 +2,7 @@ class Api::V1::Merchants::TopMerchantsByRevenueController < ApplicationControlle
   respond_to :json
 
   def index
-    binding.pry # <- this is being hit for the correct endpoint
+    # binding.pry # <- this is being hit for the correct endpoint
   end
 
   private

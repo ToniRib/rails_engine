@@ -12,12 +12,14 @@ class Api::V1::Merchants::RevenuesController < ApplicationController
   private
 
   def total_revenue
-    total = InvoiceItem.successful.joins(:invoice => :merchant).where("merchants.id = ?", params[:merchant_id]).sum("quantity * unit_price").to_f
+    total = InvoiceItem.total_revenue_for_merchant(params[:merchant_id])
     { "revenue" => total.to_s }.to_json
   end
 
   def total_revenue_on_date
-    total = InvoiceItem.successful.joins(:invoice => :merchant).where("invoices.created_at = ?", params[:date]).where("merchants.id = ?", params[:merchant_id]).sum("quantity * unit_price").to_f
+    total = InvoiceItem.
+            total_revenue_for_merchant_on_date(params[:merchant_id],
+                                               params[:date])
     { "revenue" => total.to_s }.to_json
   end
 end
