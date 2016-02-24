@@ -6,6 +6,10 @@ class Merchant < ActiveRecord::Base
 
   default_scope { order(id: :asc) }
 
+  def self.top_by_revenue(num)
+    select("id", "name", "SUM(invoice_items.unit_price * invoice_items.quantity) AS total_revenue").joins(:invoices => [:merchant, :transactions, :invoice_items]).where("result='success'").group(:id).reorder('total_revenue DESC').take(num.to_i)
+  end
+
   def total_revenue(date = nil)
     scoped = invoices_with_successful_transactions
     scoped = scoped.where("invoices.created_at = ?", date) if date
