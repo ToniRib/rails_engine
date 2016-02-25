@@ -32,6 +32,5 @@ class Item < ActiveRecord::Base
       .reorder('total_revenue DESC')
       .take(1)
       .first
-      .created_at
   end
 end
