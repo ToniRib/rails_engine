@@ -13,4 +13,13 @@ class Item < ActiveRecord::Base
       .reorder('total_revenue DESC')
       .take(num)
   end
+
+  def self.top_by_most_sold(num)
+    select('id', 'name', 'SUM(invoice_items.quantity) AS total_sold')
+      .joins(invoice_items: [:invoice, :transactions])
+      .where("result='success'")
+      .group(:id)
+      .reorder('total_sold DESC')
+      .take(num)
+  end
 end
