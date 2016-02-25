@@ -4,4 +4,13 @@ class Item < ActiveRecord::Base
   has_many :invoices, through: :invoice_items
 
   default_scope { order(id: :asc) }
+
+  def self.top_by_revenue(num)
+    select('id', 'name', 'SUM(invoice_items.unit_price * invoice_items.quantity) AS total_revenue')
+      .joins(invoice_items: [:invoice, :transactions])
+      .where("result='success'")
+      .group(:id)
+      .reorder('total_revenue DESC')
+      .take(num)
+  end
 end
