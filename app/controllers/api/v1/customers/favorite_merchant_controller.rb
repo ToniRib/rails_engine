@@ -1,7 +1,6 @@
 class Api::V1::Customers::FavoriteMerchantController < ApplicationController
-  respond_to :json
-
   def show
-    respond_with Customer.find(params[:customer_id]).favorite_merchant
+    render json: Customer.find(params[:customer_id]),
+           serializer: ::CustomerFavoriteMerchantSerializer
   end
 end
