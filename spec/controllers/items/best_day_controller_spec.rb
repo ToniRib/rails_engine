@@ -20,7 +20,7 @@ RSpec.describe Api::V1::Items::BestDayController, type: :controller do
 
       get :show, item_id: item1.id, format: :json
 
-      expect(json_response['best_day']).to eq("2016-02-23T00:00:00.000Z")
+      expect(json_response['best_day']).to eq("2016-02-24T00:00:00.000Z")
     end
   end
 end
