@@ -64,4 +64,14 @@ RSpec.describe Merchant, type: :model do
       expect(merchant3.favorite_customer.id).to eq(Customer.third.id)
     end
   end
+
+  describe "#customers_with_pending_invoices" do
+    it "returns a list of customers with failed invoices" do
+      merchant1, merchant2, merchant3 = load_merchants_with_transactions
+      customer = merchant1.customers.first
+      customer.transactions.first.update_attribute(:result, "failed")
+
+      expect(merchant1.customers_with_pending_invoices.first).to eq(customer)
+    end
+  end
 end
