@@ -1,4 +1,6 @@
 class Customer < ActiveRecord::Base
+  include SuccessfulTransactions
+
   has_many :invoices
   has_many :transactions, through: :invoices
   has_many :merchants, through: :invoices
@@ -8,8 +10,8 @@ class Customer < ActiveRecord::Base
   def favorite_merchant
     merchants
       .select('id', 'name', 'COUNT(transactions.id) AS number_of_transactions' )
-      .joins(:invoices => [:merchant, :transactions])
-      .where("result='success'")
+      .joins(invoices: :merchant)
+      .successful_transactions
       .group(:id)
       .reorder('number_of_transactions DESC')
       .take(1)

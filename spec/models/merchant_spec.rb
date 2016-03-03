@@ -74,4 +74,6 @@ RSpec.describe Merchant, type: :model do
       expect(merchant1.customers_with_pending_invoices.first).to eq(customer)
     end
   end
+
+  it_behaves_like "a model with successful transactions"
 end

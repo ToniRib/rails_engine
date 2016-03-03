@@ -9,4 +9,6 @@ RSpec.describe Customer, type: :model do
       expect(customer1.favorite_merchant.id).to eq(merchant1.id)
     end
   end
+
+  it_behaves_like "a model with successful transactions"
 end
