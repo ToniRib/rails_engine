@@ -5,11 +5,11 @@ class Merchant < ActiveRecord::Base
   has_many :customers, through: :invoices
 
   default_scope { order(id: :asc) }
+  scope :successful_transactions, -> { joins(invoices: :transactions).merge(Transaction.successful) }
 
   def self.top_by_revenue(num)
-    select_id_name_and_revenue.joins(:invoices => [:transactions,
-                                                   :invoice_items])
-                              .where("result='success'")
+    select_id_name_and_revenue.joins(invoices: :invoice_items)
+                              .successful_transactions
                               .group(:id)
                               .reorder('total_revenue DESC')
                               .take(num.to_i)
@@ -17,8 +17,8 @@ class Merchant < ActiveRecord::Base
 
   def self.top_by_number_of_items_sold(num)
     select_id_name_and_number_of_items
-      .joins(:invoices => [:merchant, :transactions, :invoice_items])
-      .where("result='success'")
+      .joins(:invoices => [:merchant, :invoice_items])
+      .successful_transactions
       .group(:id)
       .reorder('number_of_items DESC')
       .take(num.to_i)
@@ -26,8 +26,8 @@ class Merchant < ActiveRecord::Base
 
   def self.total_revenue_on_date(date)
     select('SUM(invoice_items.unit_price * invoice_items.quantity) AS total_revenue')
-      .joins(:invoices => [:invoice_items, :transactions])
-      .where("result = 'success'")
+      .joins(invoices: :invoice_items)
+      .successful_transactions
       .where("invoices.created_at = ?", date)
       .reorder('total_revenue')
       .first
