@@ -71,7 +71,9 @@ RSpec.describe Merchant, type: :model do
       customer = merchant1.customers.first
       customer.transactions.first.update_attribute(:result, "failed")
 
-      expect(merchant1.customers_with_pending_invoices.first).to eq(customer)
+      result = merchant1.customers_with_pending_invoices
+
+      expect(result.first).to eq(customer)
     end
   end
 
